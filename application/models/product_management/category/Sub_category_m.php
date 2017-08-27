@@ -50,6 +50,19 @@ class Sub_category_m extends MY_Model
         }
     }
 
+    public function get_sub_category_by_cat_id($category_id) {
+        
+        $this->db->where('category_id', $category_id);
+        $this->db->order_by("sub_category_title", "asc");
+
+        $sub_categorys = $this->get();
+        if(count($sub_categorys)){
+            return $sub_categorys;
+        }else {
+            return FALSE;
+        }
+    }
+
 }
 
 ?>

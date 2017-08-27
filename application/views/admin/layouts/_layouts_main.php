@@ -326,7 +326,7 @@
                 $('#sub_category').prop('disabled', false);
 
                 $.ajax({
-                    url: "<?php echo base_url() ?>Admin_panel/get_sub_category_by_js",
+                    url: "<?php echo base_url() ?>admin/getSubCategoryByJS",
                     type: "POST",
                     data: {'category_id': category_id},
                     dataType: "json",
@@ -458,7 +458,7 @@
                 $('#village_moholla').prop('disabled', false);
 
                 $.ajax({
-                    url: "<?php echo base_url() ?>Location/get_village_moholla_by_js",
+                    url: "<?php echo base_url() ?>admin/getVillageMohollaByJS",
                     type: "POST",
                     data: {'union_word_id': union_word_id},
                     dataType: "json",

@@ -73,11 +73,27 @@ $route['admin/deleteCategory/(:num)']    = 'admin/product_management/category/Ad
 $route['admin/subCategory']              = 'admin/product_management/category/AdminSubCategoryController/add_sub_category';
 $route['admin/updateSubCategory/(:num)'] = 'admin/product_management/category/AdminSubCategoryController/update_sub_category/$1';
 $route['admin/deleteSubCategory/(:num)'] = 'admin/product_management/category/AdminSubCategoryController/delete_sub_category/$1';
-
+$route['admin/getSubCategoryByJS']       = 'admin/product_management/category/AdminSubCategoryController/get_sub_category_by_js';
+//............ color
+$route['admin/color']              = 'admin/product_management/AdminColorController/color';
+$route['admin/updateColor/(:num)'] = 'admin/product_management/AdminColorController/update_color/$1';
+$route['admin/deleteColor/(:num)'] = 'admin/product_management/AdminColorController/delete_color/$1';
+//............ size
+$route['admin/size']               = 'admin/product_management/AdminSizeController/size';
+$route['admin/updateSize/(:num)']  = 'admin/product_management/AdminSizeController/update_size/$1';
+$route['admin/deleteSize/(:num)']  = 'admin/product_management/AdminSizeController/delete_size/$1';
+//............ Brand
+$route['admin/brand']              = 'admin/product_management/AdminBrandController/brand';
+$route['admin/updateBrand/(:num)'] = 'admin/product_management/AdminBrandController/update_brand/$1';
+$route['admin/deleteBrand/(:num)'] = 'admin/product_management/AdminBrandController/delete_brand/$1';
+//............ Branch
+$route['admin/branch']              = 'admin/product_management/AdminBranchController/branch';
+$route['admin/updateBranch/(:num)'] = 'admin/product_management/AdminBranchController/update_branch/$1';
+$route['admin/deleteBranch/(:num)'] = 'admin/product_management/AdminBranchController/delete_branch/$1';
 
 //........global user management by admin
-$route['admin/createUser']                  = 'admin/AdminUserController/create_user';
-$route['admin/userList']                    = 'admin/AdminUserController/user_list';
-$route['admin/userActive/(:num)']           = 'admin/AdminUserController/user_active/$1';
-$route['admin/userDeactive/(:num)']         = 'admin/AdminUserController/user_deactive/$1';
-$route['admin/userDelete/(:num)']           = 'admin/AdminUserController/user_delete/$1';
+$route['admin/createUser']          = 'admin/AdminUserController/create_user';
+$route['admin/userList']            = 'admin/AdminUserController/user_list';
+$route['admin/userActive/(:num)']   = 'admin/AdminUserController/user_active/$1';
+$route['admin/userDeactive/(:num)'] = 'admin/AdminUserController/user_deactive/$1';
+$route['admin/userDelete/(:num)']   = 'admin/AdminUserController/user_delete/$1';

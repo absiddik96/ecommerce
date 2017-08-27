@@ -16,7 +16,7 @@ class AdminVillageMohollaController extends Admin_Controller {
         $this->form_validation->set_rules('district_city', 'District / City', 'trim|required');
         $this->form_validation->set_rules('upazila_ps', 'Upazila / Police Station', 'trim|required');
         $this->form_validation->set_rules('union_word', 'Union / Word', 'trim|required');
-        $this->form_validation->set_rules('village_moholla_name', 'Union / Word', 'trim|required|is_unique[village_mohollas.village_moholla_name]');
+        $this->form_validation->set_rules('village_moholla_name', 'Village / Moholla', 'trim|required|is_unique[village_mohollas.village_moholla_name]');
 
         if($this->form_validation->run()){
             if ($this->village_moholla_m->add_village_moholla()) {

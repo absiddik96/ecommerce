@@ -15,6 +15,10 @@ class Admin_Controller extends MY_Controller
         $this->load->model('location/village_moholla_m');
         $this->load->model('product_management/category/category_m');
         $this->load->model('product_management/category/sub_category_m');
+        $this->load->model('product_management/color_m');
+        $this->load->model('product_management/size_m');
+        $this->load->model('product_management/brand_m');
+        $this->load->model('product_management/branch_m');
 
 
         //......checking user login or not

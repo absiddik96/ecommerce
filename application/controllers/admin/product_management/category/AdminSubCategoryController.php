@@ -55,4 +55,17 @@ class AdminSubCategoryController extends Admin_Controller {
         redirect(base_url('admin/subCategory'));
     }
 
+    public function get_sub_category_by_js() {
+        $category_id = $this->input->post("category_id");
+        $sub_categorys = $this->sub_category_m->get_sub_category_by_cat_id($category_id);
+        if (count($sub_categorys) > 0) {
+            $pro_select_box = '';
+            $pro_select_box .= '<option value="">Select Sub Category ...</option>';
+            foreach ($sub_categorys as $sub_category) {
+                $pro_select_box .= '<option value="' . $sub_category->id . '">' . $sub_category->sub_category_title . '</option>';
+            }
+            echo json_encode($pro_select_box);
+        }
+    }
+
 }
