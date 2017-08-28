@@ -10,7 +10,8 @@ class HomeController extends Frontend_Controller {
 	public function index(){
 
 		// $this->data['content'] = 'public/home';
-		// $this->load->view('public/layouts/_layout_main',$this->data);
+		$this->data['action'] = 'admin/login';
+		$this->load->view('login/login',$this->data);
 	}
 
 }

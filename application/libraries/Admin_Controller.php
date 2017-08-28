@@ -19,6 +19,8 @@ class Admin_Controller extends MY_Controller
         $this->load->model('product_management/size_m');
         $this->load->model('product_management/brand_m');
         $this->load->model('product_management/branch_m');
+        $this->load->model('admin/bank_type/e_wallet_m');
+        $this->load->model('admin/bank_type/mobile_bank_m');
 
 
         //......checking user login or not

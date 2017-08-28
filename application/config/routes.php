@@ -6,9 +6,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | URI ROUTING
 | -------------------------------------------------------------------------
 */
-$route['default_controller']                = 'Welcome';
-$route['404_override']                      = '';
-$route['translate_uri_dashes']              = FALSE;
+$route['default_controller']   = 'HomeController';
+$route['404_override']         = '';
+$route['translate_uri_dashes'] = FALSE;
 
 /*
 | -------------------------------------------------------------------------
@@ -90,6 +90,14 @@ $route['admin/deleteBrand/(:num)'] = 'admin/product_management/AdminBrandControl
 $route['admin/branch']              = 'admin/product_management/AdminBranchController/branch';
 $route['admin/updateBranch/(:num)'] = 'admin/product_management/AdminBranchController/update_branch/$1';
 $route['admin/deleteBranch/(:num)'] = 'admin/product_management/AdminBranchController/delete_branch/$1';
+//............ E-Wallet
+$route['admin/eWallet']              = 'admin/bank_type/AdminEWalletController/ewallet';
+$route['admin/updateEWallet/(:num)'] = 'admin/bank_type/AdminEWalletController/update_ewallet/$1';
+$route['admin/deleteEWallet/(:num)'] = 'admin/bank_type/AdminEWalletController/delete_ewallet/$1';
+//............ Mobile Bank
+$route['admin/mobileBank']              = 'admin/bank_type/AdminMobileBankController/mobile_bank';
+$route['admin/updateMobileBank/(:num)'] = 'admin/bank_type/AdminMobileBankController/update_mobile_bank/$1';
+$route['admin/deleteMobileBank/(:num)'] = 'admin/bank_type/AdminMobileBankController/delete_mobile_bank/$1';
 
 //........global user management by admin
 $route['admin/createUser']          = 'admin/AdminUserController/create_user';
