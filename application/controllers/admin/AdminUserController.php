@@ -6,6 +6,7 @@ class AdminUserController extends Admin_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('role/role_m');
     }
     //................ADMIN USER AREA.........
     //.........create admin
@@ -40,12 +41,22 @@ class AdminUserController extends Admin_Controller
 
         if($this->form_validation->run()){
             if ($this->admin_user_m->login()) {
-                redirect('admin/dash','refresh');
+                //.........checking user role
+                //........all layouts section gose here
+                if ($this->admin_user_m->is_super_admin()) {
+                    redirect('admin/dash','refresh');
+                }elseif ($this->admin_user_m->is_admin()) {
+                    redirect('admin/dash','refresh');
+                }else{
+                    echo "you are nothing";
+                }
+
+                //redirect('admin/dash','refresh');
             }else{
                 echo "You are not Authorized";
             }
         }
-        $this->data['action'] = "admin/login"; 
+        $this->data['action'] = "admin/login";
         $this->load->view('login/login',$this->data);
     }
 

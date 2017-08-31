@@ -8,6 +8,7 @@ class Admin_user_m extends MY_Model
     function __construct()
     {
         parent::__construct();
+        $this->load->model('role/role_m');
     }
 
     //.........create admin
@@ -47,7 +48,6 @@ class Admin_user_m extends MY_Model
     {
         $user = $this->get_by([
             'email' => $this->input->post('email'),
-            'is_admin' => 1,
             'status' => 1,
         ],true);
 
@@ -57,7 +57,7 @@ class Admin_user_m extends MY_Model
                     'user_id' => $user->user_id,
                     'name' => $user->name,
                     'email' => $user->email,
-                    'is_admin' => $user->is_admin,
+                    'role' => $user->role,
                     'admin_loggedin' => true
                 ];
                 $this->session->set_userdata($data);
@@ -81,6 +81,32 @@ class Admin_user_m extends MY_Model
         return (bool) $this->session->userdata('admin_loggedin');
     }
 
+    //.......geting user role
+    public function user_role()
+    {
+        return (int) $this->session->userdata('role');
+    }
+
+
+    public function is_super_admin()
+    {
+        return (bool) $this->role_permission('Super_Admin');
+    }
+    public function is_admin()
+    {
+        return (bool) $this->role_permission('Admin');
+    }
+
+    private function role_permission($role_name){
+        $role_id = $this->user_role();
+        $role = $this->role_m->get($role_id,true);
+        if(count($role)){
+            if ($role->name == $role_name) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }
 

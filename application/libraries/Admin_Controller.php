@@ -29,6 +29,11 @@ class Admin_Controller extends MY_Controller
             if($this->admin_user_m->admin_loggedin() == false){
                 redirect('admin/login');
             }
+            //...........only super admin and admin are permitted for thid section
+            if (!$this->admin_user_m->is_super_admin() && !$this->admin_user_m->is_admin()) {
+                redirect('home');
+            }
+
         }
     }
 }
