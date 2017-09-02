@@ -20,11 +20,12 @@ class Admin_user_m extends MY_Model
             'email' => $this->input->post('email'),
             //..........encripting password
             'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT, ['cost'=>10]),
+            'role' => $this->input->post('role'),
             'status' => $this->input->post('status'),
         ];
 
         if ($this->save($data)) {
-            return true;
+            return $data['user_id'];
         }else{
             return false;
         }
@@ -106,6 +107,19 @@ class Admin_user_m extends MY_Model
             }
         }
         return false;
+    }
+
+    public function get_user_id_by_email($email = null){
+
+        $this->db->select("id");
+        $this->db->where("email",$email);
+        $user_id = $this->get();
+        if(count($user_id)){
+            return $user_id;
+        }else {
+            return FALSE;
+        }
+
     }
 
 }

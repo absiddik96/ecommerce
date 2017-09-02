@@ -21,7 +21,8 @@ class Admin_Controller extends MY_Controller
         $this->load->model('product_management/branch_m');
         $this->load->model('admin/bank_type/e_wallet_m');
         $this->load->model('admin/bank_type/mobile_bank_m');
-
+        $this->load->model('role/role_m');
+        $this->load->model('admin/admin_user_location_m');
 
         //......checking user login or not
         $exception_uris = ['admin/login','admin/logout'];
