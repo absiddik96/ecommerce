@@ -29,12 +29,12 @@ class AdminUserController extends Admin_Controller
             $user_id = $this->admin_user_m->create_admin();
             if($user_id){
                 if($this->admin_user_location_m->create_admin_location($user_id)){
-                    $this->session->set_flashdata('message','Admin create successfull.');
+                    $this->session->set_flashdata('message','Admin / Staff create successfull.');
                 }else{
-                    $this->session->set_flashdata('message','Admin create fail!!!');
+                    $this->session->set_flashdata('message','Admin / Staff create fail!!!');
                 }
             }else{
-                $this->session->set_flashdata('message','Admin create fail!!!');
+                $this->session->set_flashdata('message','Admin / Staff create fail!!!');
             }
 
         }
@@ -117,9 +117,9 @@ class AdminUserController extends Admin_Controller
         $admin = $this->admin_user_m->get($user_id,true);
         if (count($admin)) {
             if ($this->admin_user_m->delete($user_id)) {
-                $this->session->set_flashdata('message','Admin delete successfull.');
+                $this->session->set_flashdata('message','Admin / Staff delete successfull.');
             }else{
-                $this->session->set_flashdata('message','Admin delete fail !!!');
+                $this->session->set_flashdata('message','Admin / Staff delete fail !!!');
             }
         }
 

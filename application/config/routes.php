@@ -99,6 +99,21 @@ $route['admin/mobileBank']              = 'admin/bank_type/AdminMobileBankContro
 $route['admin/updateMobileBank/(:num)'] = 'admin/bank_type/AdminMobileBankController/update_mobile_bank/$1';
 $route['admin/deleteMobileBank/(:num)'] = 'admin/bank_type/AdminMobileBankController/delete_mobile_bank/$1';
 
+//............ User Category
+$route['admin/userCategory']              = 'admin/user_category/AdminUserCategory/user_category';
+$route['admin/updateUserCategory/(:num)'] = 'admin/user_category/AdminUserCategory/update_user_category/$1';
+$route['admin/deleteUserCategory/(:num)'] = 'admin/user_category/AdminUserCategory/delete_user_category/$1';
+
+//............ User Type
+$route['admin/userType']              = 'admin/user_category/AdminUserType/user_type';
+$route['admin/updateUserType/(:num)'] = 'admin/user_category/AdminUserType/update_user_type/$1';
+$route['admin/deleteUserType/(:num)'] = 'admin/user_category/AdminUserType/delete_user_type/$1';
+
+//............ User Sub Type
+$route['admin/userSubType']              = 'admin/user_category/AdminUserSubType/user_sub_type';
+$route['admin/updateUserSubType/(:num)'] = 'admin/user_category/AdminUserSubType/update_user_sub_type/$1';
+$route['admin/deleteUserSubType/(:num)'] = 'admin/user_category/AdminUserSubType/delete_user_sub_type/$1';
+
 //........global user management by admin
 $route['admin/createUser']          = 'admin/AdminUserController/create_user';
 $route['admin/userList']            = 'admin/AdminUserController/user_list';

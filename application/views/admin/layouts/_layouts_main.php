@@ -51,6 +51,15 @@
                     </ul>
                 </li>
                 <li class="xn-openable">
+                    <a href="#"><span class="fa fa-clock-o"></span> User Category</a>
+                    <ul>
+                        <li><a href="<?php echo base_url("admin/userCategory"); ?>"><span class="fa fa-align-center"></span> User Category</a></li>
+                        <li><a href="<?php echo base_url("admin/userType"); ?>"><span class="fa fa-align-center"></span> User Type</a></li>
+                        <li><a href="<?php echo base_url("admin/userSubType"); ?>"><span class="fa fa-align-center"></span> User Sub Type</a></li>
+
+                    </ul>
+                </li>
+                <li class="xn-openable">
                     <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Product Management</span></a>
                     <ul>
                         <li class="xn-openable">
@@ -107,21 +116,11 @@
                         </li>
                     </ul>
                 </li>
-                <li class="xn-openable">
-                    <a href="#"><span class="fa fa-calendar"></span> <span class="xn-text">Event Management</span></a>
-                    <ul>
-                        <li><a href="<?php echo site_url('admin/createEvent');?>"><span class="fa fa-plus"></span> Create Event</a></li>
-                    </ul>
-                </li>
-                <li class="xn-openable">
-                    <a href="#"><span class="fa fa-calendar"></span> <span class="xn-text">News Management</span></a>
-                    <ul>
-                        <li><a href="<?php echo site_url('admin/createNews');?>"><span class="fa fa-plus"></span> Create News</a></li>
-                    </ul>
-                </li>
-
                 <li>
-                    <a href="<?php echo site_url('admin/publicMessage');?>"><span class="fa fa-plus"></span> Public Message</a>
+                    <a href="<?php echo base_url("admin/mobileBank"); ?>"><span class="fa fa-square-o"></span> <span class="xn-text">Add Mobile Bank Type</span></a>
+                </li>
+                <li>
+                    <a href="<?php echo base_url("admin/eWallet"); ?>"><span class="fa fa-square-o"></span> <span class="xn-text">Add E-Wallet Types</span></a>
                 </li>
 
 
