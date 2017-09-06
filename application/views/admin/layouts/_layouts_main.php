@@ -475,6 +475,34 @@
 <!-- END Location -->
 
 
+<!-- Start User Category -->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#user_category').on('change', function () {
+            var user_category_id = $(this).val();
+            if (user_category_id == '') {
+                $('#user_type').prop('disabled', true);
+            } else {
+                $('#user_type').prop('disabled', false);
+
+                $.ajax({
+                    url: "<?php echo base_url() ?>admin/getUserTypeByJS",
+                    type: "POST",
+                    data: {'user_category_id': user_category_id},
+                    dataType: "json",
+                    success: function (data) {
+                        $('#user_type').html(data);
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
+        });
+    });
+</script>
+<!-- END User Category -->
+
 <!-- END SCRIPTS -->
 </body>
 </html>

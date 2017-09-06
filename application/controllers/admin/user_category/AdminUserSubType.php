@@ -10,8 +10,10 @@ class AdminUserSubType extends Admin_Controller
 
 
     public function user_sub_type() {
-
+        $this->form_validation->set_rules('user_category', 'User Category ', 'trim|required');
+        $this->form_validation->set_rules('user_type', 'User Type ', 'trim|required');
         $this->form_validation->set_rules('user_sub_type_title', 'User Sub Type Title', 'trim|required|is_unique[user_sub_types.sub_type_title]');
+
 
         if($this->form_validation->run()){
             if ($this->admin_user_sub_type_m->add_user_sub_type()) {
@@ -21,7 +23,8 @@ class AdminUserSubType extends Admin_Controller
             }
         }
 
-        $this->data['sub_types'] = $this->admin_user_sub_type_m->get();
+        $this->data['user_categorys'] = $this->admin_user_category_m->get();
+        $this->data['sub_types'] = $this->admin_user_sub_type_m->get_user_sub_types();
         $this->data['content'] = 'admin/user_category/sub_type/sub_type';
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }

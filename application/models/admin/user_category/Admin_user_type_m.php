@@ -14,6 +14,7 @@ class Admin_user_type_m extends MY_Model
     public function add_user_type()
     {
         $this->data = [
+            'user_category_id' => $this->input->post('user_category'),
             'type_title' => $this->input->post('user_type_title')
         ];
 
@@ -21,6 +22,19 @@ class Admin_user_type_m extends MY_Model
             return true;
         }else{
             return false;
+        }
+    }
+
+    public function get_user_types()
+    {
+        $this->db->select('user_types.id,user_types.type_title ,user_categorys.category_title');
+        $this->db->join('user_categorys', 'user_types.user_category_id=user_categorys.id');
+        $this->db->order_by("user_types.type_title", "asc");
+        $user_types = $this->get();
+        if(count($user_types)){
+            return $user_types;
+        }else {
+            return FALSE;
         }
     }
 
@@ -34,6 +48,17 @@ class Admin_user_type_m extends MY_Model
             return true;
         }else{
             return false;
+        }
+    }
+
+    public function get_user_type_by_user_category_id($user_category_id) {
+        $this->db->where('user_category_id', $user_category_id);
+        $this->db->order_by("type_title", "asc");
+        $user_types = $this->get();
+        if(count($user_types)){
+            return $user_types;
+        }else {
+            return FALSE;
         }
     }
 

@@ -10,34 +10,61 @@
                         <h3 class="panel-title">Add User Sub Type</h3>
                     </div>
                     <div class="panel-body">
-                        <div class="">
-                            <form method="post" action="<?php echo base_url('admin/userSubType') ?>" class="form-inline">
-                                <?php if (validation_errors()) { ?>
+                        <?php if (validation_errors()) { ?>
 
-                                    <div class="alert alert-danger alert-dismissable">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                        <strong><?php echo validation_errors(); ?></strong>
-                                    </div>
-                                <?php } ?>
+                            <div class="alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong><?php echo validation_errors(); ?></strong>
+                            </div>
+                        <?php } ?>
 
-                                <?php if ($success = $this->session->flashdata('success')) { ?>
-                                    <div class="alert alert-success alert-dismissable">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                        <strong><?= $success; ?></strong>
-                                    </div>
-                                <?php } elseif ($fail = $this->session->flashdata('fail')) { ?>
-                                    <div class="alert alert-danger alert-dismissable">
-                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
-                                        <strong><?= $fail; ?></strong>
-                                    </div>
-                                <?php } ?>
+                        <?php if ($success = $this->session->flashdata('success')) { ?>
+                            <div class="alert alert-success alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong><?= $success; ?></strong>
+                            </div>
+                        <?php } elseif ($fail = $this->session->flashdata('fail')) { ?>
+                            <div class="alert alert-danger alert-dismissable">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <strong><?= $fail; ?></strong>
+                            </div>
+                        <?php } ?>
+                        <div class="col-md-7">
+                            <form method="post" action="<?php echo base_url('admin/userSubType') ?>" class="form-horizontal" role="form" enctype="multipart/form-data">
+
                                 <div class="form-group">
-                                    <label class="control-label">User Sub Type Title</label>
-                                    <input name="user_sub_type_title" class="form-control" type="text" placeholder="Enter User Sub Type">
+                                    <label class="col-md-4 control-label">User Category</label>
+                                    <div class="col-md-8">
+                                        <select name="user_category" class="form-control" id="user_category">
+                                            <option value="">Select User Category ...</option>
+                                            <?php foreach ($user_categorys as $user_category): ?>
+                                                <option value="<?php echo $user_category->id ?>"><?php echo $user_category->category_title; ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                 </div>
                                 <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" value="Add">
-                                    <input class="btn btn-danger" type="reset" value="Reset">
+                                    <label class="col-md-4 control-label">User Type</label>
+                                    <div class="col-md-8">
+                                        <select name="user_type" class="form-control" id="user_type" disabled>
+                                            <option value="">Select User Type ...</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label">User Sub Type Title</label>
+                                    <div class="col-md-8">
+                                        <input name="user_sub_type_title" class="form-control" type="text" placeholder="Enter User Sub Type">
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label class="col-md-4 control-label"></label>
+                                    <div class="col-md-8">
+                                        <input class="btn btn-primary" type="submit" value="Add">
+                                        <input class="btn btn-danger" type="reset" value="Reset">
+                                    </div>
                                 </div>
                             </form>
                         </div>
@@ -67,7 +94,9 @@
                             <thead>
                                 <tr>
                                     <th>Serial No</th>
-                                    <th>User Sub Type Title</th>
+                                    <th>User Category </th>
+                                    <th>User Type </th>
+                                    <th>User Sub Type </th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -79,6 +108,8 @@
                                         ?>
                                         <tr>
                                             <td><?php echo $i++ ?></td>
+                                            <td><?php echo $sub_type->category_title; ?></td>
+                                            <td><?php echo $sub_type->type_title; ?></td>
                                             <td><?php echo $sub_type->sub_type_title; ?></td>
                                             <td>
                                                 <a href="<?php echo base_url('admin/updateUserSubType/' . $sub_type->id); ?>" class="btn  btn-primary"><i class="fa fa-lg fa-edit"></i></a>

@@ -108,6 +108,8 @@ $route['admin/deleteUserCategory/(:num)'] = 'admin/user_category/AdminUserCatego
 $route['admin/userType']              = 'admin/user_category/AdminUserType/user_type';
 $route['admin/updateUserType/(:num)'] = 'admin/user_category/AdminUserType/update_user_type/$1';
 $route['admin/deleteUserType/(:num)'] = 'admin/user_category/AdminUserType/delete_user_type/$1';
+$route['admin/getUserTypeByJS'] = 'admin/user_category/AdminUserType/get_user_type_by_js';
+
 
 //............ User Sub Type
 $route['admin/userSubType']              = 'admin/user_category/AdminUserSubType/user_sub_type';
