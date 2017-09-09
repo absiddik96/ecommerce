@@ -12,7 +12,7 @@ class Admin_user_m extends MY_Model
     }
 
     //.........create admin
-    public function create_admin($is_admin = null)
+    public function create_admin_user()
     {
         $data = [
             'user_id' => rand(2000,2999).time(),
@@ -20,7 +20,7 @@ class Admin_user_m extends MY_Model
             'email' => $this->input->post('email'),
             //..........encripting password
             'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT, ['cost'=>10]),
-            'role' => $this->input->post('role'),
+            'role' => $this->input->post('user_role'),
             'status' => $this->input->post('status'),
         ];
 
@@ -31,14 +31,14 @@ class Admin_user_m extends MY_Model
         }
     }
 
-
-    public function admin_list()
+    public function users_admins_list($role_id)
     {
-
         $this->db->where_not_in('user_id',$this->session->userdata('user_id'));
-        $admins = $this->get();
-        if(count($admins)){
-            return $admins;
+        $this->db->where('role',$role_id);
+
+        $users_admins = $this->get();
+        if(count($users_admins)){
+            return $users_admins;
         }else {
             return FALSE;
         }
@@ -107,19 +107,6 @@ class Admin_user_m extends MY_Model
             }
         }
         return false;
-    }
-
-    public function get_user_id_by_email($email = null){
-
-        $this->db->select("id");
-        $this->db->where("email",$email);
-        $user_id = $this->get();
-        if(count($user_id)){
-            return $user_id;
-        }else {
-            return FALSE;
-        }
-
     }
 
 }

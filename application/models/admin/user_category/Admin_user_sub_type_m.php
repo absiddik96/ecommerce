@@ -53,6 +53,17 @@ class Admin_user_sub_type_m extends MY_Model
         }
     }
 
+    public function get_user_sub_type_by_user_type_id($user_type_id) {
+        $this->db->where('user_type_id', $user_type_id);
+        $this->db->order_by("sub_type_title", "asc");
+        $user_sub_types = $this->get();
+        if(count($user_sub_types)){
+            return $user_sub_types;
+        }else {
+            return FALSE;
+        }
+    }
+
 }
 
 ?>

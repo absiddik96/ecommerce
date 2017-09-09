@@ -57,6 +57,21 @@ class AdminUserSubType extends Admin_Controller
         redirect(base_url('admin/userSubType'));
     }
 
+    public function get_user_sub_type_by_js()
+    {
+        $user_type_id = $this->input->post("user_type_id");
+        $user_sub_types = $this->admin_user_sub_type_m->get_user_sub_type_by_user_type_id($user_type_id);
+        if (count($user_sub_types) > 0) {
+            $pro_select_box = '';
+            $pro_select_box .= '<option value="">Select User Type ...</option>';
+            foreach ($user_sub_types as $user_sub_type) {
+                $pro_select_box .= '<option value="' . $user_sub_type->id . '">' . $user_sub_type->sub_type_title . '</option>';
+            }
+            $pro_select_box .= '<option value="0">Others</option>';
+            echo json_encode($pro_select_box);
+        }
+    }
+
 }
 
 

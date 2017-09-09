@@ -1,7 +1,7 @@
 <!-- START DEFAULT DATATABLE -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Admin List</h3>
+        <h3 class="panel-title">Super Admin List</h3>
         <ul class="panel-controls">
             <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
             <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
@@ -35,11 +35,11 @@
                             <td><?php echo htmlentities($admin->status == 1? 'Active':'Deactived');?></td>
                             <td>
                                 <?php if($admin->status == 1): ?>
-                                    <a href="<?php echo site_url('admin/adminDeactive/').urlencode($admin->user_id);?>" class="btn btn-sm btn-warning">Deactive</a>
+                                    <a href="<?php echo site_url('admin/userAdminDeactive/').urlencode($admin->user_id).'/superAdminList';?>" class="btn btn-sm btn-warning">Deactive</a>
                                 <?php else: ?>
-                                    <a href="<?php echo site_url('admin/adminActive/').urlencode($admin->user_id);?>" class="btn btn-sm btn-success">Active</a>
+                                    <a href="<?php echo site_url('admin/userAdminActive/').urlencode($admin->user_id).'/superAdminList';?>" class="btn btn-sm btn-success">Active</a>
                                 <?php endif; ?>
-                                <a href="<?php echo site_url('admin/adminDelete/').urlencode($admin->user_id);?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this admin?');">Delete</a>
+                                <a href="<?php echo site_url('admin/userAdminDelete/').urlencode($admin->user_id).'/superAdminList';?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this admin?');">Delete</a>
                             </td>
                         </tr>
                     <?php endforeach;?>

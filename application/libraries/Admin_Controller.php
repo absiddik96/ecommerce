@@ -26,6 +26,7 @@ class Admin_Controller extends MY_Controller
         $this->load->model('admin/user_category/admin_user_category_m');
         $this->load->model('admin/user_category/admin_user_type_m');
         $this->load->model('admin/user_category/admin_user_sub_type_m');
+        $this->load->model('suppliers_n_buyers/suppliers_n_buyers_details_m');
 
         //......checking user login or not
         $exception_uris = ['admin/login','admin/logout'];

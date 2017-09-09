@@ -11,7 +11,7 @@ class Admin_user_location_m extends MY_Model
     }
 
     //.........create admin
-    public function create_admin_location($user_id = null)
+    public function create_admin_user_location($user_id = null)
     {
         $data = [
             'user_id'            => $user_id,

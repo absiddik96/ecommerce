@@ -1,7 +1,7 @@
 <!-- START DEFAULT DATATABLE -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Create Admin / Staff</h3>
+        <h3 class="panel-title">Create Supplier / Buyer</h3>
     </div>
     <div class="panel-body">
         <!--ERROR -->
@@ -12,9 +12,10 @@
             continue;
         }
         ?>
-        <form class="form-horizontal" action="<?php echo site_url('admin/createAdmin');?>" method="post">
+        <form class="form-horizontal" action="<?php echo site_url('admin/createUser');?>" method="post">
 
             <div class="col-sm-6">
+
                 <div class="form-group">
                     <label class="col-md-4 control-label">Name</label>
                     <div class="col-md-8">
@@ -123,9 +124,56 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="col-md-4 control-label">User Characteristic</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="user_characteristic">
+                            <option value="">Select User Characteristic ...</option>
+                            <option value="0">Single</option>
+                            <option value="1">Corporate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">User Category</label>
+                    <div class="col-md-8">
+                        <select name="user_category" class="form-control" id="user_category">
+                            <option value="">Select User Category ...</option>
+                            <?php foreach ($user_categorys as $user_category): ?>
+                                <option value="<?php echo $user_category->id ?>"><?php echo $user_category->category_title; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-4 control-label">User Type</label>
+                    <div class="col-md-8">
+                        <select name="user_type" class="form-control" id="user_type" disabled>
+                            <option value="">Select User Type ...</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">User Sub Type</label>
+                    <div class="col-md-8">
+                        <select name="user_sub_type" class="form-control" id="user_sub_type" disabled>
+                            <option value="">Select User Sub Type ...</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" >
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-8">
+                        <textarea id="others_option" name="others_option"  class="form-control" rows="5" disabled></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
                     <label class="col-md-4 control-label">Status</label>
                     <div class="col-md-8">
                         <select class="form-control" name="status">
+                            <option value="">Select Status ...</option>
                             <option value="0">Deactived</option>
                             <option value="1">Active</option>
                         </select>

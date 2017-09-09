@@ -19,16 +19,22 @@ $route['translate_uri_dashes'] = FALSE;
 //.......ADMIN.............
 
 //.........admin dashboard
-$route['admin/dash']                        = 'admin/AdminDashController/index';
+$route['admin/dash']                            = 'admin/AdminDashController/index';
 //........admin login and logout
-$route['admin/login']                       = 'admin/AdminUserController/login';
-$route['admin/logout']                      = 'admin/AdminUserController/logout';
+$route['admin/login']                           = 'admin/AdminUserController/login';
+$route['admin/logout']                          = 'admin/AdminUserController/logout';
 //........admin user management
-$route['admin/createAdmin']                 = 'admin/AdminUserController/create_admin';
-$route['admin/adminList']                   = 'admin/AdminUserController/admin_list';
-$route['admin/adminActive/(:num)']          = 'admin/AdminUserController/admin_active/$1';
-$route['admin/adminDeactive/(:num)']        = 'admin/AdminUserController/admin_deactive/$1';
-$route['admin/adminDelete/(:num)']          = 'admin/AdminUserController/admin_delete/$1';
+$route['admin/createAdmin']                     = 'admin/AdminUserController/create_admin';
+$route['admin/superAdminList']                  = 'admin/AdminUserController/super_admin_list';
+$route['admin/adminList']                       = 'admin/AdminUserController/admin_list';
+$route['admin/userAdminActive/(:num)/(:any)']   = 'admin/AdminUserController/user_admin_active/$1/$2';
+$route['admin/userAdminDeactive/(:num)/(:any)'] = 'admin/AdminUserController/user_admin_deactive/$1/$2';
+$route['admin/userAdminDelete/(:num)/(:any)']   = 'admin/AdminUserController/user_admin_delete/$1/$2';
+
+//........Supplier Buyer management by admin
+$route['admin/createUser']                      = 'admin/AdminUserController/create_user';
+$route['admin/supplierList']                    = 'admin/AdminUserController/supplier_list';
+$route['admin/buyerList']                       = 'admin/AdminUserController/buyer_list';
 
 //............ Location...................
 //............ Country
@@ -108,17 +114,11 @@ $route['admin/deleteUserCategory/(:num)'] = 'admin/user_category/AdminUserCatego
 $route['admin/userType']              = 'admin/user_category/AdminUserType/user_type';
 $route['admin/updateUserType/(:num)'] = 'admin/user_category/AdminUserType/update_user_type/$1';
 $route['admin/deleteUserType/(:num)'] = 'admin/user_category/AdminUserType/delete_user_type/$1';
-$route['admin/getUserTypeByJS'] = 'admin/user_category/AdminUserType/get_user_type_by_js';
+$route['admin/getUserTypeByJS']       = 'admin/user_category/AdminUserType/get_user_type_by_js';
 
 
 //............ User Sub Type
 $route['admin/userSubType']              = 'admin/user_category/AdminUserSubType/user_sub_type';
 $route['admin/updateUserSubType/(:num)'] = 'admin/user_category/AdminUserSubType/update_user_sub_type/$1';
 $route['admin/deleteUserSubType/(:num)'] = 'admin/user_category/AdminUserSubType/delete_user_sub_type/$1';
-
-//........global user management by admin
-$route['admin/createUser']          = 'admin/AdminUserController/create_user';
-$route['admin/userList']            = 'admin/AdminUserController/user_list';
-$route['admin/userActive/(:num)']   = 'admin/AdminUserController/user_active/$1';
-$route['admin/userDeactive/(:num)'] = 'admin/AdminUserController/user_deactive/$1';
-$route['admin/userDelete/(:num)']   = 'admin/AdminUserController/user_delete/$1';
+$route['admin/getUserSubTypeByJS']       = 'admin/user_category/AdminUserSubType/get_user_sub_type_by_js';

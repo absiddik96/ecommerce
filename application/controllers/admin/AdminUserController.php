@@ -22,13 +22,13 @@ class AdminUserController extends Admin_Controller
         $this->form_validation->set_rules('upazila_ps', 'Upazila / Police Station', 'trim|required');
         $this->form_validation->set_rules('union_word', 'Union / Word', 'trim|required');
         $this->form_validation->set_rules('village_moholla', 'Village / Moholla', 'trim|required');
-        $this->form_validation->set_rules('role','User Role','required|min[1]|max[1]|numeric');
+        $this->form_validation->set_rules('user_role','User Role','required|numeric');
         $this->form_validation->set_rules('status','Status','required|max_length[1]|numeric');
 
         if($this->form_validation->run()){
-            $user_id = $this->admin_user_m->create_admin();
+            $user_id = $this->admin_user_m->create_admin_user();
             if($user_id){
-                if($this->admin_user_location_m->create_admin_location($user_id)){
+                if($this->admin_user_location_m->create_admin_user_location($user_id)){
                     $this->session->set_flashdata('message','Admin / Staff create successfull.');
                 }else{
                     $this->session->set_flashdata('message','Admin / Staff create fail!!!');
@@ -82,15 +82,30 @@ class AdminUserController extends Admin_Controller
         redirect('admin/login','refresh');
     }
 
-    public function admin_list()
+    public function get_role_id_by_role_name($role_name)
     {
-        //....get all admins
-        $this->data['admins'] = $this->admin_user_m->admin_list();
-        $this->data['content'] = 'admin/user/admin/view';
+        return $this->role_m->get_role_by_role_name($role_name);
+    }
+
+    public function super_admin_list()
+    {
+        //....get all super admins
+        $role = $this->get_role_id_by_role_name('Super_Admin');
+        $this->data['admins'] = $this->admin_user_m->users_admins_list($role->id);
+        $this->data['content'] = 'admin/user/admin/super_admin_view';
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
 
-    public function admin_active($user_id=0)
+    public function admin_list()
+    {
+        //....get all admins
+        $role = $this->get_role_id_by_role_name('Admin');
+        $this->data['admins'] = $this->admin_user_m->users_admins_list($role->id);
+        $this->data['content'] = 'admin/user/admin/admin_view';
+        $this->load->view('admin/layouts/_layouts_main',$this->data);
+    }
+
+    public function user_admin_active($user_id=0,$rPath)
     {
         $admin = $this->admin_user_m->get($user_id,true);
         if (count($admin)) {
@@ -98,10 +113,10 @@ class AdminUserController extends Admin_Controller
             $this->admin_user_m->save($data,$user_id);
         }
 
-        redirect('admin/adminList','refresh');
+        redirect('admin/'.$rPath,'refresh');
     }
 
-    public function admin_deactive($user_id=0)
+    public function user_admin_deactive($user_id=0,$rPath)
     {
         $admin = $this->admin_user_m->get($user_id,true);
         if (count($admin)) {
@@ -109,10 +124,10 @@ class AdminUserController extends Admin_Controller
             $this->admin_user_m->save($data,$user_id);
         }
 
-        redirect('admin/adminList','refresh');
+        redirect('admin/'.$rPath,'refresh');
     }
 
-    public function admin_delete($user_id=0)
+    public function user_admin_delete($user_id=0,$rPath)
     {
         $admin = $this->admin_user_m->get($user_id,true);
         if (count($admin)) {
@@ -123,74 +138,67 @@ class AdminUserController extends Admin_Controller
             }
         }
 
-        redirect('admin/adminList','refresh');
+        redirect('admin/'.$rPath,'refresh');
     }
     //................NORMAL USER AREA..............
     //.........create user
     public function create_user()
     {
-        //.........validation
         $this->form_validation->set_rules('name','Name','required|min_length[2]|max_length[50]');
         $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[users_admin.email]');
         $this->form_validation->set_rules('password','Password','required|min_length[6]|max_length[50]');
         $this->form_validation->set_rules('confirm_password','Confirm Password','required|matches[password]');
-        $this->form_validation->set_rules('role','User Role','required|min[1]|max[1]|numeric');
+        $this->form_validation->set_rules('country', 'Country', 'trim|required');
+        $this->form_validation->set_rules('division_state', 'Division / Province / State', 'trim|required');
+        $this->form_validation->set_rules('district_city', 'District / City', 'trim|required');
+        $this->form_validation->set_rules('upazila_ps', 'Upazila / Police Station', 'trim|required');
+        $this->form_validation->set_rules('union_word', 'Union / Word', 'trim|required');
+        $this->form_validation->set_rules('village_moholla', 'Village / Moholla', 'trim|required');
+        $this->form_validation->set_rules('user_role','User Role','required|numeric');
         $this->form_validation->set_rules('status','Status','required|max_length[1]|numeric');
 
         if($this->form_validation->run()){
-            if($this->global_user_m->create_user()){
-                $this->session->set_flashdata('message','User create successfull.');
+            $user_id = $this->admin_user_m->create_admin_user();
+            if($user_id){
+                if($this->admin_user_location_m->create_admin_user_location($user_id)){
+                    if($this->suppliers_n_buyers_details_m->create_suppliers_n_buyers_details($user_id)){
+                        $this->session->set_flashdata('message','Supplier / Buyer create successfull.');
+                    }else{
+                        $this->session->set_flashdata('message','Supplier / Buyer create fail!!!');
+                    }
+                }else{
+                    $this->session->set_flashdata('message','Supplier / Buyer create fail!!!');
+                }
             }else{
-                $this->session->set_flashdata('message','User create fail!!!');
+                $this->session->set_flashdata('message','Supplier / Buyer create fail!!!');
             }
-        }
 
-        $this->data['content'] = 'admin/user/global_user/create';
+        }
+        $this->data['countries'] = $this->country_m->get();
+        $this->data['user_categorys'] = $this->admin_user_category_m->get();
+        $this->data['roles']     = $this->role_m->role_for_supplier_buyer();
+        $this->data['content']   = 'admin/user/supplier_buyer/create';
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
 
-    public function user_list()
+    public function supplier_list()
     {
         //....get all users
-        $this->data['users'] = $this->global_user_m->get();
-        $this->data['content'] = 'admin/user/global_user/view';
+        $role = $this->get_role_id_by_role_name('Supplier');
+        $this->data['page_name'] = 'Supplier';
+        $this->data['users'] = $this->admin_user_m->users_admins_list($role->id);
+        $this->data['content'] = 'admin/user/supplier_buyer/supplier_view';
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
 
-    public function user_active($user_id=0)
+    public function buyer_list()
     {
-        $user = $this->global_user_m->get($user_id,true);
-        if (count($user)) {
-            $data = ['status' => 1];
-            $this->global_user_m->save($data,$user_id);
-        }
-
-        redirect('admin/userList','refresh');
-    }
-
-    public function user_deactive($user_id=0)
-    {
-        $user = $this->global_user_m->get($user_id,true);
-        if (count($user)) {
-            $data = ['status' => 0];
-            $this->global_user_m->save($data,$user_id);
-        }
-
-        redirect('admin/userList','refresh');
-    }
-
-    public function user_delete($user_id=0)
-    {
-        $user = $this->global_user_m->get($user_id,true);
-        if (count($user)) {
-            if ($this->global_user_m->delete($user_id)) {
-                $this->session->set_flashdata('message','User delete successfull.');
-            }else{
-                $this->session->set_flashdata('message','User delete fail !!!');
-            }
-        }
-
-        redirect('admin/userList','refresh');
+        //....get all users
+        $role = $this->get_role_id_by_role_name('Buyer');
+        $this->data['page_name'] = 'Buyer';
+        $this->data['users'] = $this->admin_user_m->users_admins_list($role->id);
+        $this->data['content'] = 'admin/user/supplier_buyer/buyer_view';
+        $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
 
 }
