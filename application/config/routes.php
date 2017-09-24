@@ -33,8 +33,46 @@ $route['admin/userAdminDelete/(:num)/(:any)']   = 'admin/AdminUserController/use
 
 //........Supplier Buyer management by admin
 $route['admin/createUser']                      = 'admin/AdminUserController/create_user';
+$route['admin/createUser/(:any)']               = 'admin/AdminUserController/create_user/$1';
 $route['admin/supplierList']                    = 'admin/AdminUserController/supplier_list';
 $route['admin/buyerList']                       = 'admin/AdminUserController/buyer_list';
+
+//............supplier .............
+$route['supplier']                                = 'SupplierController/index';
+$route['supplier/(:num)']                         = 'SupplierController/index/$1';
+
+$route['supplier/addBank/(:num)']                 = 'SupplierController/add_bank/$1';
+$route['supplier/editBank/(:num)/(:num)']         = 'SupplierController/edit_bank/$1/$2';
+$route['supplier/deleteBank/(:num)/(:num)']       = 'SupplierController/delete_bank/$1/$2';
+
+$route['supplier/addEwallet/(:num)']              = 'SupplierController/add_ewallet/$1';
+$route['supplier/editEwallet/(:num)/(:num)']      = 'SupplierController/edit_ewallet/$1/$2';
+$route['supplier/deleteEwallet/(:num)/(:num)']    = 'SupplierController/delete_ewallet/$1/$2';
+
+$route['supplier/addMobileBank/(:num)']           = 'SupplierController/add_mobile_bank/$1';
+$route['supplier/editMobileBank/(:num)/(:num)']   = 'SupplierController/edit_mobile_bank/$1/$2';
+$route['supplier/deleteMobileBank/(:num)/(:num)'] = 'SupplierController/delete_mobile_bank/$1/$2';
+
+
+//............buyer .............
+$route['buyer']                                = 'BuyerController/index';
+$route['buyer/(:num)']                         = 'BuyerController/index/$1';
+
+$route['buyer/addBank/(:num)']                 = 'BuyerController/add_bank/$1';
+$route['buyer/editBank/(:num)/(:num)']         = 'BuyerController/edit_bank/$1/$2';
+$route['buyer/deleteBank/(:num)/(:num)']       = 'BuyerController/delete_bank/$1/$2';
+
+$route['buyer/addEwallet/(:num)']              = 'BuyerController/add_ewallet/$1';
+$route['buyer/editEwallet/(:num)/(:num)']      = 'BuyerController/edit_ewallet/$1/$2';
+$route['buyer/deleteEwallet/(:num)/(:num)']    = 'BuyerController/delete_ewallet/$1/$2';
+
+$route['buyer/addMobileBank/(:num)']           = 'BuyerController/add_mobile_bank/$1';
+$route['buyer/editMobileBank/(:num)/(:num)']   = 'BuyerController/edit_mobile_bank/$1/$2';
+$route['buyer/deleteMobileBank/(:num)/(:num)'] = 'BuyerController/delete_mobile_bank/$1/$2';
+
+
+
+
 
 //............ Location...................
 //............ Country
@@ -122,3 +160,8 @@ $route['admin/userSubType']              = 'admin/user_category/AdminUserSubType
 $route['admin/updateUserSubType/(:num)'] = 'admin/user_category/AdminUserSubType/update_user_sub_type/$1';
 $route['admin/deleteUserSubType/(:num)'] = 'admin/user_category/AdminUserSubType/delete_user_sub_type/$1';
 $route['admin/getUserSubTypeByJS']       = 'admin/user_category/AdminUserSubType/get_user_sub_type_by_js';
+
+//............ role
+$route['admin/role']                     = 'admin/AdminRoleController/add_role';
+$route['admin/updateRole/(:num)']        = 'admin/AdminRoleController/update_role/$1';
+$route['admin/deleteRole/(:num)']        = 'admin/AdminRoleController/delete_role/$1';

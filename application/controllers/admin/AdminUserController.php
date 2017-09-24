@@ -142,7 +142,7 @@ class AdminUserController extends Admin_Controller
     }
     //................NORMAL USER AREA..............
     //.........create user
-    public function create_user()
+    public function create_user($role_name = null)
     {
         $this->form_validation->set_rules('name','Name','required|min_length[2]|max_length[50]');
         $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[users_admin.email]');
@@ -154,11 +154,13 @@ class AdminUserController extends Admin_Controller
         $this->form_validation->set_rules('upazila_ps', 'Upazila / Police Station', 'trim|required');
         $this->form_validation->set_rules('union_word', 'Union / Word', 'trim|required');
         $this->form_validation->set_rules('village_moholla', 'Village / Moholla', 'trim|required');
-        $this->form_validation->set_rules('user_role','User Role','required|numeric');
         $this->form_validation->set_rules('status','Status','required|max_length[1]|numeric');
 
+
+
         if($this->form_validation->run()){
-            $user_id = $this->admin_user_m->create_admin_user();
+            $role =  $this->role_m->get_role_by_role_name($role_name);
+            $user_id = $this->admin_user_m->create_admin_user($role->id);
             if($user_id){
                 if($this->admin_user_location_m->create_admin_user_location($user_id)){
                     if($this->suppliers_n_buyers_details_m->create_suppliers_n_buyers_details($user_id)){
@@ -174,10 +176,10 @@ class AdminUserController extends Admin_Controller
             }
 
         }
-        $this->data['countries'] = $this->country_m->get();
+        $this->data['countries']      = $this->country_m->get();
         $this->data['user_categorys'] = $this->admin_user_category_m->get();
-        $this->data['roles']     = $this->role_m->role_for_supplier_buyer();
-        $this->data['content']   = 'admin/user/supplier_buyer/create';
+        $this->data['role_name']      = $role_name;
+        $this->data['content']        = 'admin/user/supplier_buyer/create';
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
 

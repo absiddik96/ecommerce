@@ -1,12 +1,10 @@
-<?php $this->load->view('admin/header'); ?>
-
 <!-- PAGE CONTENT WRAPPER -->
 <div class="page-content-wrap">
 
     <div class="row">
         <div class="col-md-12">
 
-            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url('admin_panel/mobile_bank/'.$user_id.'?url='.$pre_url); ?>">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url($action."/".$user_id); ?>">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Add Mobile Bank</strong></h3>
@@ -19,22 +17,10 @@
                         </div>
                     <?php endif; ?>
 
-                    <?php if ($success = $this->session->flashdata('success')) : ?>
-                        <div class="alert alert-success alert-dismissable">
-                            <strong><?php echo $success; ?></strong>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if ($failed = $this->session->flashdata('fail')) : ?>
-                        <div class="alert alert-danger alert-dismissable">
-                            <strong><?php echo $failed; ?></strong>
-                        </div>
-                    <?php endif; ?>
-
                     <div class="panel-body">
 
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Select Country</label>
+                            <label class="col-md-3 col-xs-12 control-label">Country</label>
                             <div class="col-md-6 col-xs-12">
                                 <select name="country_id" class="form-control" id="country">
                                     <option value="">Select Country ...</option>
@@ -46,12 +32,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="col-md-3 col-xs-12 control-label">Select Mobile Bank</label>
+                            <label class="col-md-3 col-xs-12 control-label">Mobile Bank</label>
                             <div class="col-md-6 col-xs-12">
                                 <select name="account_id" class="form-control">
                                     <option value="">Select Mobile Bank</option>
                                     <?php foreach ($mb_types as $mb_type) { ?>
-                                        <option value="<?php echo $mb_type->id?>"><?php echo $mb_type->mb_title?></option>
+                                        <option value="<?php echo $mb_type->id?>"><?php echo $mb_type->mobile_bank_name?></option>
                                     <?php }?>
                                 </select>
                             </div>
@@ -84,4 +70,3 @@
     </div>
 </div>
 <!-- END PAGE CONTENT WRAPPER -->
-<?php $this->load->view('admin/footer'); ?>

@@ -1,7 +1,7 @@
 <!-- START DEFAULT DATATABLE -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Create Supplier / Buyer</h3>
+        <h3 class="panel-title">Create <?php echo $role_name?></h3>
     </div>
     <div class="panel-body">
         <!--ERROR -->
@@ -12,7 +12,7 @@
             continue;
         }
         ?>
-        <form class="form-horizontal" action="<?php echo site_url('admin/createUser');?>" method="post">
+        <form class="form-horizontal" action="<?php echo site_url('admin/createUser/'.$role_name);?>" method="post">
 
             <div class="col-sm-6">
 
@@ -108,18 +108,6 @@
                                 <option value="">Select Village / Moholla ...</option>
                             </select>
                         </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-4 control-label">Role</label>
-                    <div class="col-md-8">
-                        <select class="form-control" name="user_role">
-                            <option value="">Select Role</option>
-                            <?php foreach ($roles as $role): ?>
-                            <option value="<?php echo $role->id; ?>"><?php echo str_replace("_"," ",$role->name); ?></option>
-                            <?php endforeach; ?>
-                        </select>
                     </div>
                 </div>
 

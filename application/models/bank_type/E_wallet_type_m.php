@@ -1,8 +1,8 @@
 <?php
 
-class mobile_bank_m extends MY_Model
+class E_wallet_type_m extends MY_Model
 {
-    protected $_table_name = 'mobile_banks';
+    protected $_table_name = 'ewallets';
     protected $_primary_key = 'id';
 
     function __construct()
@@ -11,10 +11,10 @@ class mobile_bank_m extends MY_Model
     }
 
     //.........create admin
-    public function add_mobile_bank()
+    public function add_ewallet()
     {
         $this->data = [
-            'mobile_bank_name' => $this->input->post('mobile_bank_name')
+            'ewallet_name' => $this->input->post('ewallet_name')
         ];
 
         if ($this->save($this->data)) {
@@ -24,13 +24,13 @@ class mobile_bank_m extends MY_Model
         }
     }
 
-    public function update_mobile_bank($mobile_bank_id = null)
+    public function update_ewallet($e_wallet_id = null)
     {
         $this->data = [
-            'mobile_bank_name' => $this->input->post('mobile_bank_name')
+            'ewallet_name' => $this->input->post('ewallet_name')
         ];
 
-        if ($this->save($this->data,$mobile_bank_id)) {
+        if ($this->save($this->data,$e_wallet_id)) {
             return true;
         }else{
             return false;

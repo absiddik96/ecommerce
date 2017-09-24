@@ -36,6 +36,7 @@
                             <td><?php echo htmlentities($admin->email);?></td>
                             <td><?php echo htmlentities($admin->status == 1? 'Active':'Deactived');?></td>
                             <td>
+                                <a href="<?php echo site_url('supplier/').urlencode($admin->user_id);?>" class="btn btn-sm btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a>
                                 <?php if($admin->status == 1): ?>
                                     <a href="<?php echo site_url('admin/userAdminDeactive/').urlencode($admin->user_id).'/supplierList';?>" class="btn btn-sm btn-warning">Deactive</a>
                                 <?php else: ?>

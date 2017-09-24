@@ -1,12 +1,10 @@
-<?php $this->load->view('admin/header'); ?>
-
 <!-- PAGE CONTENT WRAPPER -->
 <div class="page-content-wrap">
 
     <div class="row">
         <div class="col-md-12">
 
-            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url('Admin_panel/bank_info/'.$user_id.'?url='.$pre_url); ?>">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url($action."/".$user_id); ?>">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Bank Info</strong></h3>
@@ -16,18 +14,6 @@
                         <div class="alert alert-danger alert-dismissable" >
                             <a href="#" class="close" data-dismiss="alert"><i class="fa fa-close"></i></a>
                             <strong><?php echo validation_errors(); ?></strong>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if ($success = $this->session->flashdata('success')) : ?>
-                        <div class="alert alert-success alert-dismissable">
-                            <strong><?php echo $success; ?></strong>
-                        </div>
-                    <?php endif; ?>
-
-                    <?php if ($failed = $this->session->flashdata('fail')) : ?>
-                        <div class="alert alert-danger alert-dismissable">
-                            <strong><?php echo $failed; ?></strong>
                         </div>
                     <?php endif; ?>
 
@@ -109,4 +95,3 @@
     </div>
 </div>
 <!-- END PAGE CONTENT WRAPPER -->
-<?php $this->load->view('admin/footer'); ?>

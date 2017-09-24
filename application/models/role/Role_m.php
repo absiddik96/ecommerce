@@ -9,6 +9,34 @@ class Role_m extends MY_Model
         parent::__construct();
     }
 
+    public function add_role()
+    {
+        $role_name = ucwords(strtolower($this->input->post('role_name')));
+        $this->data = [
+            'name' => str_replace(" ","_",$role_name)
+        ];
+
+        if ($this->save($this->data)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function update_role($role_id = null)
+    {
+        $role_name = ucwords(strtolower($this->input->post('role_name')));
+        $this->data = [
+            'name' => str_replace(" ","_",$role_name)
+        ];
+
+        if ($this->save($this->data,$role_id)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function role_for_admin_staff(){
 
         $names = array("Admin","Super_Admin");

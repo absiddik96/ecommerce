@@ -1,12 +1,10 @@
-<?php $this->load->view('admin/header'); ?>
-
 <!-- PAGE CONTENT WRAPPER -->
 <div class="page-content-wrap">
 
     <div class="row">
         <div class="col-md-12">
 
-            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url('admin_panel/update_mobile_bank/'.$mbanks->id.'?url='.$pre_url); ?>">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url($action.'/'.$user_id.'/'.$mobile_bank_id); ?>">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Add Mobile Bank</strong></h3>
@@ -60,4 +58,3 @@
     </div>
 </div>
 <!-- END PAGE CONTENT WRAPPER -->
-<?php $this->load->view('admin/footer'); ?>

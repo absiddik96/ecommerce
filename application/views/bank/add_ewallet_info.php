@@ -1,12 +1,10 @@
-<?php $this->load->view('admin/header'); ?>
-
 <!-- PAGE CONTENT WRAPPER -->
 <div class="page-content-wrap">
 
     <div class="row">
         <div class="col-md-12">
 
-            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url('admin_panel/add_ewallet/'.$user_id.'?url='.$pre_url); ?>">
+            <form class="form-horizontal" enctype="multipart/form-data" method="post" action="<?php echo base_url($action.'/'.$user_id); ?>">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title"><strong>Add E-Wallet</strong></h3>
@@ -41,7 +39,7 @@
                                     <select name="ew_type_id" class="form-control">
                                         <option value="">Select E-Wallet</option>
                                         <?php foreach ($ew_types as $ew_type) { ?>
-                                            <option value="<?php echo $ew_type->id?>"><?php echo $ew_type->ew_title?></option>
+                                            <option value="<?php echo $ew_type->id?>"><?php echo $ew_type->ewallet_name?></option>
                                         <?php }?>
                                     </select>
 
@@ -78,4 +76,3 @@
     </div>
 </div>
 <!-- END PAGE CONTENT WRAPPER -->
-<?php $this->load->view('admin/footer'); ?>

@@ -35,7 +35,7 @@
                     <a href="#"><span class="fa fa-user"></span> <span class="xn-text">User Management</span></a>
                     <ul>
                         <li class="xn-openable">
-                            <a href="#"><span class="fa fa-user"></span>Admin</a>
+                            <a href="#"><span class="fa fa-user"></span> Admin</a>
                             <ul>
                                 <li><a href="<?php echo site_url('admin/createAdmin');?>"><span class="fa fa-plus"></span> Create</a></li>
                                 <li><a href="<?php echo site_url('admin/superAdminList');?>"><span class="fa fa-eye"></span> View Super Admin</a></li>
@@ -43,10 +43,16 @@
                             </ul>
                         </li>
                         <li class="xn-openable">
-                            <a href="#"><span class="fa fa-user"></span>Supplier & Buyer</a>
+                            <a href="#"><span class="fa fa-user"></span> Supplier</a>
                             <ul>
-                                <li><a href="<?php echo site_url('admin/createUser');?>"><span class="fa fa-plus"></span> Create</a></li>
+                                <li><a href="<?php echo site_url('admin/createUser/Supplier');?>"><span class="fa fa-plus"></span> Create</a></li>
                                 <li><a href="<?php echo site_url('admin/supplierList');?>"><span class="fa fa-eye"></span> View Supplier</a></li>
+                            </ul>
+                        </li>
+                        <li class="xn-openable">
+                            <a href="#"><span class="fa fa-user"></span> Buyer</a>
+                            <ul>
+                                <li><a href="<?php echo site_url('admin/createUser/Buyer');?>"><span class="fa fa-plus"></span> Create</a></li>
                                 <li><a href="<?php echo site_url('admin/buyerList');?>"><span class="fa fa-eye"></span> View Buyer</a></li>
                             </ul>
                         </li>
@@ -118,6 +124,7 @@
                         </li>
                     </ul>
                 </li>
+                <li><a href="<?php echo site_url('admin/role');?>"><span class="fa fa-plus"></span> Create Role</a></li>
                 <li>
                     <a href="<?php echo base_url("admin/mobileBank"); ?>"><span class="fa fa-square-o"></span> <span class="xn-text">Add Mobile Bank Type</span></a>
                 </li>
