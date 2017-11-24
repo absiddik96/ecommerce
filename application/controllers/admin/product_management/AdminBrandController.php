@@ -53,7 +53,7 @@ class AdminBrandController extends Admin_Controller {
             }
             redirect(base_url('admin/brand'));
         }
-        
+
         $this->data['categorys'] = $this->category_m->get();
         $this->data['brand'] = $brand;
         $this->data['content'] = 'admin/product_management/brand/edit_brand';
@@ -90,7 +90,7 @@ class AdminBrandController extends Admin_Controller {
         if ($this->brand_m->delete($brand_id)) {
             $this->session->set_flashdata('success','Delete Brand successfull.');
         }else {
-            $this->session->set_flashdata('fail','Delete Brand successfull.');
+            $this->session->set_flashdata('fail','Delete Brand Failed.');
         }
         redirect(base_url('admin/brand'));
     }

@@ -39,7 +39,7 @@ class Role_m extends MY_Model
 
     public function role_for_admin_staff(){
 
-        $names = array("Admin","Super_Admin");
+        $names = array("Admin","Super_Admin","Agent");
 
         $this->db->where_in("name", $names);
         $roles = $this->get();

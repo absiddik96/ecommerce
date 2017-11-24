@@ -164,11 +164,11 @@
                                 <thead class="success">
                                     <tr>
                                         <th>BANK NAME</th>
+                                        <th>BANK ADDRESS</th>
+                                        <th>SWIFT CODE</th>
+                                        <th>IBAN / ROUTING NUMBER</th>
                                         <th>ACCOUNT NAME</th>
                                         <th>ACCOUNT NUMBER</th>
-                                        <th>IBAN / ROUTING NUMBER</th>
-                                        <th>SWIFT CODE</th>
-                                        <th>BANK ADDRESS</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -179,11 +179,11 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $bank_info->bank_name; ?></td>
+                                                <td><?php echo $bank_info->bank_address; ?></td>
+                                                <td><?php echo $bank_info->swift_code; ?></td>
+                                                <td><?php echo $bank_info->iban_number; ?></td>
                                                 <td><?php echo $bank_info->ac_name; ?></td>
                                                 <td><?php echo $bank_info->ac_number; ?></td>
-                                                <td><?php echo $bank_info->iban_number; ?></td>
-                                                <td><?php echo $bank_info->swift_code; ?></td>
-                                                <td><?php echo $bank_info->bank_address; ?></td>
                                                 <td class="pull-left">
                                                     <a class="btn btn-primary" href="<?php echo base_url($editBank.'/'.$user_id.'/'.$bank_info->id)?>"><i class="fa fa-edit"></i></a>
                                                     <button type="button" class="btn btn-danger" data-toggle="modal" data-target="<?php echo '#bank' . $bank_info->id; ?>"><i class="glyphicon glyphicon-trash"></i></i></button>
@@ -354,6 +354,87 @@
                                 </tbody>
                             </table>
                             <a class="btn btn-primary pull-right" href="<?php echo base_url($addEwallet."/".$user_id)?> ">Add E-Wallet</a>
+                        </div>
+                    </div>
+                    <!-- END BASIC TABLE SAMPLE -->
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+
+                    <!-- START BASIC TABLE SAMPLE -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Proof of Address</h1>
+                        </div>
+
+                        <div class="panel-body">
+                            <?php if ($success = $this->session->flashdata('proof_success')) : ?>
+                                <div class="alert alert-success alert-dismissable">
+                                    <strong><?php echo $success; ?></strong>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php if ($failed = $this->session->flashdata('proof_fail')) : ?>
+                                <div class="alert alert-danger alert-dismissable">
+                                    <strong><?php echo $failed; ?></strong>
+                                </div>
+                            <?php endif; ?>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Proof of Address Type</td>
+                                        <td><?php if(!empty($proof)) echo $proof->id_type?></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attachment</td>
+                                    </tr>
+                                    <td><img style="width:100%" src="<?php if(!empty($proof)) echo base_url('uploads/proof_of_address/'.$proof->attachment);?> " alt=""></td>
+                                </tbody>
+                            </table><br><br>
+                            <a class="btn btn-primary pull-right" href="<?php echo base_url($proofOfAddress."/".$user_id)?> ">Edit</a>
+                        </div>
+                    </div>
+                    <!-- END BASIC TABLE SAMPLE -->
+                </div>
+
+                <div class="col-md-6">
+
+                    <!-- START BASIC TABLE SAMPLE -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h1 class="panel-title">Personal Identity</h1>
+                        </div>
+                        <?php if ($success = $this->session->flashdata('pi_success')) : ?>
+                            <div class="alert alert-success alert-dismissable">
+                                <strong><?php echo $success; ?></strong>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php if ($failed = $this->session->flashdata('pi_fail')) : ?>
+                            <div class="alert alert-danger alert-dismissable">
+                                <strong><?php echo $failed; ?></strong>
+                            </div>
+                        <?php endif; ?>
+                        <div class="panel-body">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>Id Type</td>
+                                        <td><?php if(!empty($pi)) echo $pi->id_type?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Id Number</td>
+                                        <td><?php if(!empty($pi)) echo $pi->id_number ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Attachment</td>
+                                    </tr>
+                                    <td><img style="width:100%" src="<?php if(!empty($pi)) echo base_url('uploads/personal_identity/'.$pi->attachment);?> " alt=""></td>
+                                </tbody>
+                            </table>
+                            <a class="btn btn-primary pull-right" href="<?php echo base_url($personalIdentity."/".$user_id)?> ">Edit</a>
                         </div>
                     </div>
                     <!-- END BASIC TABLE SAMPLE -->

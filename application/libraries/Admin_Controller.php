@@ -15,6 +15,11 @@ class Admin_Controller extends MY_Controller
         $this->load->model('location/village_moholla_m');
         $this->load->model('product_management/category/category_m');
         $this->load->model('product_management/category/sub_category_m');
+        $this->load->model('product_management/product/product_size_m');
+        $this->load->model('product_management/product/product_color_m');
+        $this->load->model('product_management/product/product_discription_m');
+        $this->load->model('product_management/product/product_image_m');
+        $this->load->model('product_management/product/product_details_m');
         $this->load->model('product_management/color_m');
         $this->load->model('product_management/size_m');
         $this->load->model('product_management/brand_m');
@@ -30,6 +35,8 @@ class Admin_Controller extends MY_Controller
         $this->load->model('bank/bank_m');
         $this->load->model('bank/ewallet_m');
         $this->load->model('bank/mobile_bank_m');
+        $this->load->model('personal_identity/personal_identity_m');
+        $this->load->model('proof_of_address/proof_of_address_m');
 
 
         //......checking user login or not
@@ -38,7 +45,7 @@ class Admin_Controller extends MY_Controller
             if($this->admin_user_m->admin_loggedin() == false){
                 redirect('admin/login');
             }
-            //...........only super admin and admin are permitted for thid section
+            //...........only super admin and admin are permitted for this section
             if (!$this->admin_user_m->is_super_admin() && !$this->admin_user_m->is_admin()) {
                 redirect('home');
             }

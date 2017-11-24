@@ -9,7 +9,7 @@
         try {
             $this->load->view('errors/custom_error');
         } catch (Exception $e) {
-            continue;
+            
         }
         ?>
         <form class="form-horizontal" action="<?php echo site_url('admin/createUser/'.$role_name);?>" method="post">

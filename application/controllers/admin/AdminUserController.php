@@ -105,6 +105,15 @@ class AdminUserController extends Admin_Controller
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
 
+    public function agent_list()
+    {
+        //....get all agents
+        $role = $this->get_role_id_by_role_name('Agent');
+        $this->data['agents'] = $this->admin_user_m->users_admins_list($role->id);
+        $this->data['content'] = 'admin/user/agent/agent_view';
+        $this->load->view('admin/layouts/_layouts_main',$this->data);
+    }
+
     public function user_admin_active($user_id=0,$rPath)
     {
         $admin = $this->admin_user_m->get($user_id,true);

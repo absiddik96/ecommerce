@@ -27,6 +27,17 @@ class SupplierController extends Admin_Controller
         $this->data['editEwallet']      = "supplier/editEwallet";
         $this->data['deleteEwallet']    = "supplier/deleteEwallet";
 
+        $this->data['personalIdentity'] = "supplier/personalIdentity";
+        $this->data['proofOfAddress'] = "supplier/proofOfAddress";
+
+        $this->data['pi']            = $this->personal_identity_m->get_by([
+            'user_id' => $user_id,
+        ],TRUE);
+
+        $this->data['proof']            = $this->proof_of_address_m->get_by([
+            'user_id' => $user_id,
+        ],TRUE);
+
         $this->data['user_id']       = $user_id;
 
         $this->data['user']          = $this->admin_user_m->get_user_admin_info($user_id);
@@ -205,6 +216,111 @@ class SupplierController extends Admin_Controller
             $this->session->set_flashdata('mobile_bank_fail','Delete Mobile Bank Account Failed.');
         }
         redirect(base_url('supplier/'.$user_id));
+    }
+
+    public function edit_personal_identity($user_id = null,$pi_id = null)
+    {
+        $this->form_validation->set_rules('id_type', 'ID Type', 'trim|required');
+        $this->form_validation->set_rules('id_number', 'ID Number', 'trim|required');
+
+        $pi = $this->personal_identity_m->get_by([
+            'user_id' => $user_id,
+        ],TRUE);
+
+        $pi_id=""; if(!empty($pi)) $pi_id=$pi->id;
+        $image_name = $this->imageUpload('attachment',$user_id);
+        if($this->form_validation->run()){
+            if($image_name!=FALSE){
+                unlink('uploads/personal_identity/'.$pi->attachment);
+            }
+            else {
+                $image_name = $pi->attachment;
+            }
+            if($this->personal_identity_m->edit_personal_identity($user_id,$image_name,$pi_id)){
+                $this->session->set_flashdata('pi_success','successfull Updated Personal Identity.');
+            }else{
+                $this->session->set_flashdata('pi_fail','Updated Personal Identity fail!!!');
+            }
+            redirect(base_url('supplier/'.$user_id));
+        }
+        $this->data['pi']      = $pi;
+        $this->data['action']  = "supplier/personalIdentity";
+        $this->data['user_id'] = $user_id;
+        $this->data['content'] = 'personal_identity/edit';
+        $this->load->view('admin/layouts/_layouts_main',$this->data);
+    }
+
+    public function edit_proof_of_address($user_id = null,$proof_id = null)
+    {
+        $this->form_validation->set_rules('id_type', 'ID Type', 'trim|required');
+
+        $proof = $this->proof_of_address_m->get_by([
+            'user_id' => $user_id,
+        ],TRUE);
+
+        $proof_id=""; if(!empty($proof)) $proof_id=$proof->id;
+        $image_name = $this->imageUpload_2('attachment',$user_id);
+        if($this->form_validation->run()){
+            if($image_name!=FALSE){
+                unlink('uploads/proof_of_address/'.$proof->attachment);
+            }
+            else {
+                $image_name = $proof->attachment;
+            }
+            if($this->proof_of_address_m->edit_proof_of_address($user_id,$image_name,$proof_id)){
+                $this->session->set_flashdata('proof_success','successfull Updated Personal Identity.');
+            }else{
+                $this->session->set_flashdata('proof_fail','Updated Personal Identity fail!!!');
+            }
+            redirect(base_url('supplier/'.$user_id));
+        }
+        $this->data['proof']      = $proof;
+        $this->data['action']  = "supplier/proofOfAddress";
+        $this->data['user_id'] = $user_id;
+        $this->data['content'] = 'proof_of_address/edit';
+        $this->load->view('admin/layouts/_layouts_main',$this->data);
+    }
+
+    function imageUpload($fieldName = null,$newname = null) {
+        $path = "uploads/personal_identity/";
+
+        if (!is_dir($path)) {
+            mkdir($path,0777,TRUE);
+        }
+
+        $config['upload_path']   = $path;
+        $config['allowed_types'] = 'gif|png|jpeg|jpg';
+        $config['max_size']      = '1024';
+        $config['file_name']     = $newname;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload($fieldName)) {
+            $data = $this->upload->data();
+            $fileName = $data['file_name'];
+            return $fileName;
+        } else {
+            return FALSE;
+        }
+    }
+
+    function imageUpload_2($fieldName = null,$newname = null) {
+        $path = "uploads/proof_of_address/";
+
+        if (!is_dir($path)) {
+            mkdir($path,0777,TRUE);
+        }
+
+        $config['upload_path']   = $path;
+        $config['allowed_types'] = 'gif|png|jpeg|jpg';
+        $config['max_size']      = '1024';
+        $config['file_name']     = $newname;
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload($fieldName)) {
+            $data = $this->upload->data();
+            $fileName = $data['file_name'];
+            return $fileName;
+        } else {
+            return FALSE;
+        }
     }
 
 

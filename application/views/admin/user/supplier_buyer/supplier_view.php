@@ -10,14 +10,6 @@
         </ul>
     </div>
     <div class="panel-body">
-        <!--ERROR -->
-        <?php
-        try {
-            $this->load->view('errors/custom_error');
-        } catch (Exception $e) {
-            continue;
-        }
-        ?>
         <table class="table datatable">
             <thead>
                 <tr>

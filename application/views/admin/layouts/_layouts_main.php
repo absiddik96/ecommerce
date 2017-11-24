@@ -13,6 +13,14 @@
     <!-- CSS INCLUDE -->
     <link rel="stylesheet" type="text/css" id="theme" href="<?php echo base_url('assets/backend/admin/css/theme-default.css')?>"/>
     <!-- EOF CSS INCLUDE -->
+
+    <!-- product -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>toolkit/multipleSelect/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>toolkit/custom/css/bootstrap_imageupload.css">
+    <link href="<?php echo base_url(); ?>toolkit/custom/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <!-- product -->
+
+
 </head>
 <body>
     <!-- START PAGE CONTAINER -->
@@ -38,22 +46,23 @@
                             <a href="#"><span class="fa fa-user"></span> Admin</a>
                             <ul>
                                 <li><a href="<?php echo site_url('admin/createAdmin');?>"><span class="fa fa-plus"></span> Create</a></li>
-                                <li><a href="<?php echo site_url('admin/superAdminList');?>"><span class="fa fa-eye"></span> View Super Admin</a></li>
-                                <li><a href="<?php echo site_url('admin/adminList');?>"><span class="fa fa-eye"></span> View Admin</a></li>
+                                <li><a href="<?php echo site_url('admin/superAdminList');?>"><span class="fa fa-eye"></span> List Of Super Admin</a></li>
+                                <li><a href="<?php echo site_url('admin/adminList');?>"><span class="fa fa-eye"></span> List Of Admin</a></li>
+                                <li><a href="<?php echo site_url('admin/agentList');?>"><span class="fa fa-eye"></span> List Of Agent</a></li>
                             </ul>
                         </li>
                         <li class="xn-openable">
                             <a href="#"><span class="fa fa-user"></span> Supplier</a>
                             <ul>
                                 <li><a href="<?php echo site_url('admin/createUser/Supplier');?>"><span class="fa fa-plus"></span> Create</a></li>
-                                <li><a href="<?php echo site_url('admin/supplierList');?>"><span class="fa fa-eye"></span> View Supplier</a></li>
+                                <li><a href="<?php echo site_url('admin/supplierList');?>"><span class="fa fa-eye"></span> List Of Supplier</a></li>
                             </ul>
                         </li>
                         <li class="xn-openable">
                             <a href="#"><span class="fa fa-user"></span> Buyer</a>
                             <ul>
                                 <li><a href="<?php echo site_url('admin/createUser/Buyer');?>"><span class="fa fa-plus"></span> Create</a></li>
-                                <li><a href="<?php echo site_url('admin/buyerList');?>"><span class="fa fa-eye"></span> View Buyer</a></li>
+                                <li><a href="<?php echo site_url('admin/buyerList');?>"><span class="fa fa-eye"></span> List Of Buyer</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -70,6 +79,13 @@
                 <li class="xn-openable">
                     <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Product Management</span></a>
                     <ul>
+                        <li class="xn-openable">
+                            <a href="#"><span class="fa fa-clock-o"></span> Product</a>
+                            <ul>
+                                <li><a href="<?php echo base_url("admin/addProduct"); ?>"><span class="fa fa-plus"></span>Create Product</a></li>
+                                <li><a href="<?php echo base_url("admin/productList"); ?>"><span class="fa fa-align-justify"></span> List of Product</a></li>
+                            </ul>
+                        </li>
                         <li class="xn-openable">
                             <a href="#"><span class="fa fa-clock-o"></span> Category</a>
                             <ul>
@@ -207,6 +223,7 @@
 <script type="text/javascript" src="<?php echo base_url('assets/backend/admin/js/plugins/jquery/jquery-ui.min.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/backend/admin/js/plugins/bootstrap/bootstrap.min.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/backend/admin/js/settings.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/backend/admin/js/plugins/summernote/summernote.js"></script>
 <!-- END PLUGINS -->
 
 <!-- START THIS PAGE PLUGINS-->
@@ -228,31 +245,6 @@
 <!-- END TEMPLATE -->
 
 
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#category').on('change', function () {
-            var category_id = $(this).val();
-            if (category_id == '') {
-                $('#sub_category').prop('disabled', true);
-            } else {
-                $('#sub_category').prop('disabled', false);
-
-                $.ajax({
-                    url: "<?php echo base_url() ?>admin/getSubCategoryByJS",
-                    type: "POST",
-                    data: {'category_id': category_id},
-                    dataType: "json",
-                    success: function (data) {
-                        $('#sub_category').html(data);
-                    },
-                    error: function () {
-
-                    }
-                });
-            }
-        });
-    });
-</script>
 
 <!-- START Location -->
 
@@ -455,6 +447,65 @@
     });
 </script>
 <!-- END User Category -->
+
+<!-- product -->
+<script src="<?php echo base_url(); ?>toolkit/custom/js/fileinput.min.js" type="text/javascript"></script>
+<script src="<?php echo base_url(); ?>toolkit/custom/js/bootstrap_imageupload.js"></script>
+<script>
+    var $imageupload = $('.imageupload');
+    $imageupload.imageupload();
+
+    $('#imageupload-disable').on('click', function () {
+        $imageupload.imageupload('disable');
+        $(this).blur();
+    })
+
+    $('#imageupload-enable').on('click', function () {
+        $imageupload.imageupload('enable');
+        $(this).blur();
+    })
+
+    $('#imageupload-reset').on('click', function () {
+        $imageupload.imageupload('reset');
+        $(this).blur();
+    });
+</script>
+
+<script type="text/javascript" src="<?php echo base_url(); ?>toolkit/multipleSelect/semantic.min.js"></script>
+<script type="text/javascript">
+    $('#size').dropdown();
+    $('#category').dropdown();
+    $('#company').dropdown();
+    $('#color').dropdown();
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#category').on('change', function () {
+            var category_id = $(this).val();
+            if (category_id == '') {
+                $('#sub_category').prop('disabled', true);
+            } else {
+                $('#sub_category').prop('disabled', false);
+
+                $.ajax({
+                    url: "<?php echo base_url() ?>admin/getSubCategoryByJS",
+                    type: "POST",
+                    data: {'category_id': category_id},
+                    dataType: "json",
+                    success: function (data) {
+                        $('#sub_category').html(data);
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
+        });
+    });
+</script>
+
+<!-- product -->
 
 <!-- END SCRIPTS -->
 </body>

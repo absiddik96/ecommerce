@@ -27,9 +27,26 @@ $route['admin/logout']                          = 'admin/AdminUserController/log
 $route['admin/createAdmin']                     = 'admin/AdminUserController/create_admin';
 $route['admin/superAdminList']                  = 'admin/AdminUserController/super_admin_list';
 $route['admin/adminList']                       = 'admin/AdminUserController/admin_list';
+$route['admin/agentList']                       = 'admin/AdminUserController/agent_list';
 $route['admin/userAdminActive/(:num)/(:any)']   = 'admin/AdminUserController/user_admin_active/$1/$2';
 $route['admin/userAdminDeactive/(:num)/(:any)'] = 'admin/AdminUserController/user_admin_deactive/$1/$2';
 $route['admin/userAdminDelete/(:num)/(:any)']   = 'admin/AdminUserController/user_admin_delete/$1/$2';
+
+//..................product
+$route['admin/addProduct']                       = 'admin/product/AdminProductController/add_product';
+
+$route['admin/editProductImage/(:num)']          = 'admin/product/AdminProductController/edit_product_image/$1';
+$route['admin/deleteProductImage/(:num)']        = 'admin/product/AdminProductController/delete_product_image/$1';
+
+$route['admin/editProductBrand/(:num)']          = 'admin/product/AdminProductController/edit_product_brand/$1';
+$route['admin/editProductCategory/(:num)']          = 'admin/product/AdminProductController/edit_product_cat/$1';
+$route['admin/editProductDetails/(:num)']        = 'admin/product/AdminProductController/edit_product_details/$1';
+$route['admin/editProductDetails/(:num)/(:num)'] = 'admin/product/AdminProductController/edit_product_details/$1/$2';
+
+$route['admin/deleteProduct/(:num)']             = 'admin/product/AdminProductController/product_delete/$1';
+$route['admin/viewProduct/(:num)']               = 'admin/product/AdminProductController/product_view/$1';
+$route['admin/productList']                      = 'admin/product/AdminProductController/product_list';
+
 
 //........Supplier Buyer management by admin
 $route['admin/createUser']                      = 'admin/AdminUserController/create_user';
@@ -53,6 +70,12 @@ $route['supplier/addMobileBank/(:num)']           = 'SupplierController/add_mobi
 $route['supplier/editMobileBank/(:num)/(:num)']   = 'SupplierController/edit_mobile_bank/$1/$2';
 $route['supplier/deleteMobileBank/(:num)/(:num)'] = 'SupplierController/delete_mobile_bank/$1/$2';
 
+$route['supplier/personalIdentity/(:num)']        = 'SupplierController/edit_personal_identity/$1';
+$route['supplier/personalIdentity/(:num)/(:num)'] = 'SupplierController/edit_personal_identity/$1/$2';
+
+$route['supplier/proofOfAddress/(:num)']          = 'SupplierController/edit_proof_of_address/$1';
+$route['supplier/proofOfAddress/(:num)/(:num)']   = 'SupplierController/edit_proof_of_address/$1/$2';
+
 
 //............buyer .............
 $route['buyer']                                = 'BuyerController/index';
@@ -70,6 +93,11 @@ $route['buyer/addMobileBank/(:num)']           = 'BuyerController/add_mobile_ban
 $route['buyer/editMobileBank/(:num)/(:num)']   = 'BuyerController/edit_mobile_bank/$1/$2';
 $route['buyer/deleteMobileBank/(:num)/(:num)'] = 'BuyerController/delete_mobile_bank/$1/$2';
 
+$route['buyer/personalIdentity/(:num)']        = 'BuyerController/edit_personal_identity/$1';
+$route['buyer/personalIdentity/(:num)/(:num)'] = 'BuyerController/edit_personal_identity/$1/$2';
+
+$route['buyer/proofOfAddress/(:num)']          = 'BuyerController/edit_proof_of_address/$1';
+$route['buyer/proofOfAddress/(:num)/(:num)']   = 'BuyerController/edit_proof_of_address/$1/$2';
 
 
 
