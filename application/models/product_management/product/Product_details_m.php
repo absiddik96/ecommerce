@@ -62,6 +62,20 @@ class Product_details_m extends MY_Model
         }
     }
 
+    public function update_product_cat($product_code='')
+    {
+        $this->data = [
+            'category_id'     => $this->input->post('category'),
+            'sub_category_id' => $this->input->post('sub_category'),
+        ];
+
+        if ($this->save($this->data,$product_code)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function update_product_details($product_code='')
     {
         $product_title = $this->input->post('product_title');
@@ -96,7 +110,7 @@ class Product_details_m extends MY_Model
 
     public function get_product_category_sub_category($product_code='')
     {
-        $this->db->select('categorys.category_title,sub_categorys.sub_category_title');
+        $this->db->select('categorys.id,categorys.category_title,sub_categorys.id,sub_categorys.sub_category_title');
         $this->db->join('categorys', 'product_details.category_id = categorys.id');
         $this->db->join('sub_categorys', 'product_details.sub_category_id = sub_categorys.id');
         $product_category_sub_category = $this->get_by(['product_code ' => $product_code],true);

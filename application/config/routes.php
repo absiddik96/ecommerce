@@ -33,19 +33,26 @@ $route['admin/userAdminDeactive/(:num)/(:any)'] = 'admin/AdminUserController/use
 $route['admin/userAdminDelete/(:num)/(:any)']   = 'admin/AdminUserController/user_admin_delete/$1/$2';
 
 //..................product
-$route['admin/addProduct']                       = 'admin/product/AdminProductController/add_product';
+$route['admin/addProduct']                        = 'admin/product/AdminProductController/add_product';
 
-$route['admin/editProductImage/(:num)']          = 'admin/product/AdminProductController/edit_product_image/$1';
-$route['admin/deleteProductImage/(:num)']        = 'admin/product/AdminProductController/delete_product_image/$1';
+$route['admin/editProductImage/(:num)']           = 'admin/product/AdminProductController/edit_product_image/$1';
+$route['admin/deleteProductImage/(:num)']         = 'admin/product/AdminProductController/delete_product_image/$1';
 
-$route['admin/editProductBrand/(:num)']          = 'admin/product/AdminProductController/edit_product_brand/$1';
-$route['admin/editProductCategory/(:num)']          = 'admin/product/AdminProductController/edit_product_cat/$1';
-$route['admin/editProductDetails/(:num)']        = 'admin/product/AdminProductController/edit_product_details/$1';
-$route['admin/editProductDetails/(:num)/(:num)'] = 'admin/product/AdminProductController/edit_product_details/$1/$2';
+$route['admin/editProductBrand/(:num)']           = 'admin/product/AdminProductController/edit_product_brand/$1';
+$route['admin/editProductCategory/(:num)']        = 'admin/product/AdminProductController/edit_product_cat/$1';
 
-$route['admin/deleteProduct/(:num)']             = 'admin/product/AdminProductController/product_delete/$1';
-$route['admin/viewProduct/(:num)']               = 'admin/product/AdminProductController/product_view/$1';
-$route['admin/productList']                      = 'admin/product/AdminProductController/product_list';
+$route['admin/editProductColor/(:num)']           = 'admin/product/AdminProductController/edit_product_color/$1';
+$route['admin/deleteProductColor/(:num)/(:num)']  = 'admin/product/AdminProductController/delete_product_color/$1/$2';
+
+$route['admin/editProductSize/(:num)']           = 'admin/product/AdminProductController/edit_product_size/$1';
+$route['admin/deleteProductSize/(:num)/(:num)']  = 'admin/product/AdminProductController/delete_product_size/$1/$2';
+
+$route['admin/editProductDetails/(:num)']         = 'admin/product/AdminProductController/edit_product_details/$1';
+$route['admin/editProductDetails/(:num)/(:num)']  = 'admin/product/AdminProductController/edit_product_details/$1/$2';
+
+$route['admin/deleteProduct/(:num)']              = 'admin/product/AdminProductController/product_delete/$1';
+$route['admin/viewProduct/(:num)']                = 'admin/product/AdminProductController/product_view/$1';
+$route['admin/productList']                       = 'admin/product/AdminProductController/product_list';
 
 
 //........Supplier Buyer management by admin

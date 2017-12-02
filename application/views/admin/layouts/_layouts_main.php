@@ -140,7 +140,9 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="<?php echo site_url('admin/role');?>"><span class="fa fa-plus"></span> Create Role</a></li>
+                <li>
+                    <a href="<?php echo base_url("admin/role"); ?>"><span class="fa fa-square-o"></span> <span class="xn-text">Create Role</span></a>
+                </li>
                 <li>
                     <a href="<?php echo base_url("admin/mobileBank"); ?>"><span class="fa fa-square-o"></span> <span class="xn-text">Add Mobile Bank Type</span></a>
                 </li>

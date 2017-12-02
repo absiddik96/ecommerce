@@ -4,6 +4,7 @@ class Product_color_m extends MY_Model
 {
     protected $_table_name = 'product_colors';
     protected $_primary_key = 'id';
+    protected $s_d = '';
 
     function __construct()
     {
@@ -16,11 +17,11 @@ class Product_color_m extends MY_Model
         $colors = $this->input->post('color');
         $number_of_color = count($colors);
         for ($j = 0; $j < $number_of_color; $j++) {
-            $s_d[$j]['color_id'] = $colors[$j];
-            $s_d[$j]['product_code'] = $product_code;
+            $this->s_d[$j]['color_id'] = $colors[$j];
+            $this->s_d[$j]['product_code'] = $product_code;
         }
 
-        if ($this->db->insert_batch($this->_table_name,$s_d)) {
+        if ($this->db->insert_batch($this->_table_name,$this->s_d)) {
             return true;
         }else{
             return false;

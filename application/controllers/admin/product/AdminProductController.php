@@ -114,19 +114,76 @@ class AdminProductController extends Admin_Controller
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
 
+    public function edit_product_color($product_code = '')
+    {
+        $this->form_validation->set_rules('color[]','Color','trim|required|is_unique[product_colors.color_id]');
+        if ($this->form_validation->run()) {
+            if ($this->product_color_m->add_color($product_code)) {
+                $this->session->set_flashdata('success', 'Product Color Update Successfully');
+            } else {
+                $this->session->set_flashdata('fail', 'Failed Update Product Color');
+            }
+            redirect(base_url('admin/viewProduct/' . $product_code));
+        }
+        $this->data['product_code']  = $product_code;
+        $this->data['product_colors'] = $this->product_color_m->get_colors($product_code);
+        $this->data['colors'] = $this->color_m->get();
+        $this->data['content'] = 'product/edit_product_color';
+        $this->load->view('admin/layouts/_layouts_main',$this->data);
+    }
+
+    public function delete_product_color($product_color_id = '',$product_code = '')
+    {
+        if($this->product_color_m->delete($product_color_id)){
+            $this->session->set_flashdata('delete_success','Delete Product Color Successfully.');
+        }else {
+            $this->session->set_flashdata('delete_fail','Delete Product Color Failed.');
+        }
+        redirect(base_url('admin/editProductColor/' . $product_code));
+    }
+
+    public function edit_product_size($product_code = '')
+    {
+        $this->form_validation->set_rules('size[]','size','trim|required|is_unique[product_sizes.size_id]');
+        if ($this->form_validation->run()) {
+            if ($this->product_size_m->add_size($product_code)) {
+                $this->session->set_flashdata('success', 'Product Size Update Successfully');
+            } else {
+                $this->session->set_flashdata('fail', 'Failed Update Product Size');
+            }
+            redirect(base_url('admin/viewProduct/' . $product_code));
+        }
+        $this->data['product_code']  = $product_code;
+        $this->data['product_sizes'] = $this->product_size_m->get_sizes($product_code);
+        $this->data['sizes'] = $this->size_m->get();
+        $this->data['content'] = 'product/edit_product_size';
+        $this->load->view('admin/layouts/_layouts_main',$this->data);
+    }
+
+    public function delete_product_size($product_size_id = '',$product_code = '')
+    {
+        if($this->product_size_m->delete($product_size_id)){
+            $this->session->set_flashdata('delete_success','Delete Product Size Successfully.');
+        }else {
+            $this->session->set_flashdata('delete_fail','Delete Product Size Failed.');
+        }
+        redirect(base_url('admin/editProductSize/' . $product_code));
+    }
+
     public function edit_product_cat($product_code = '')
     {
         $this->form_validation->set_rules('category','Category','trim|required');
         if ($this->form_validation->run()) {
-            if ($this->product_details_m->update_product_band($product_code)) {
-                $this->session->set_flashdata('success', 'Product Brand Update Successfully');
+            if ($this->product_details_m->update_product_cat($product_code)) {
+                $this->session->set_flashdata('success', 'Product category Update Successfully');
             } else {
-                $this->session->set_flashdata('fail', 'Failed Update Product Brand');
+                $this->session->set_flashdata('fail', 'Failed Update Product category');
             }
             redirect(base_url('admin/viewProduct/' . $product_code));
         }
         $this->data['product_code']  = $product_code;
         $this->data['categorys'] = $this->category_m->get();
+        $this->data['product_category_sub_category'] = $this->product_details_m->get_product_category_sub_category($product_code);
         $this->data['content'] = 'product/edit_product_cat';
         $this->load->view('admin/layouts/_layouts_main',$this->data);
     }
@@ -161,7 +218,7 @@ class AdminProductController extends Admin_Controller
             $file = $this->delete_file_n_folder($path_2);
         }
 
-        if(1){
+        if($file){
             $this->product_details_m->delete($product_code);
             $this->session->set_flashdata('success','Delete Brand Successfully.');
         }else {

@@ -153,7 +153,7 @@
                                         }
 
                                         ?></td>
-                                        <td><a class=" pull-right btn btn-primary" href="">Update</a></td>
+                                        <td><a class=" pull-right btn btn-primary" href="<?= base_url('admin/editProductSize/'.$product_code);?>">Update</a></td>
 
                                     </tr>
 
@@ -174,7 +174,7 @@
                                             }
                                         }
                                         ?></td>
-                                        <td><a class=" pull-right btn btn-primary" href="">Update</a></td>
+                                        <td><a class=" pull-right btn btn-primary" href="<?= base_url('admin/editProductColor/'.$product_code);?>">Update</a></td>
 
                                     </tr>
                                 </tbody>
@@ -241,7 +241,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <a class=" pull-right btn btn-primary" href="">Update</a>
+                            <a class=" pull-right btn btn-primary" href="<?= base_url('admin/editProductCategory/'.$product_code);?>">Update</a>
                         </div>
                     </div>
                     <!-- END BASIC TABLE SAMPLE -->

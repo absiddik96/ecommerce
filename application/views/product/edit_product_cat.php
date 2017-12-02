@@ -4,18 +4,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-md-12">
-                <form method="post" action="<?= base_url('admin/editProductBrand/'.$product_code);?>" enctype="multipart/form-data">
+                <form method="post" action="<?= base_url('admin/editProductCategory/'.$product_code);?>" enctype="multipart/form-data">
                     <!-- START DEFAULT DATATABLE -->
                     <div class="panel panel-default">
                         <div class="panel-heading">
 
-                            <h3 class="panel-title">Update Product Brand</h3>
+                            <h3 class="panel-title">Update Product category</h3>
                         </div>
                         <div class="panel-body">
                             <div class="">
-
                                 <div class="row">
-
                                     <div class="col-md-12">
                                         <div class="col-md-12">
                                             <div class="card">
@@ -54,9 +52,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <h3 class="pull-left ">
-
-                                        </h3>
                                         <h3 class="pull-right ">
 
                                             <button type="submit" class="btn btn-primary"><i class="fa fa-lg fa-save"></i> Save</button>
