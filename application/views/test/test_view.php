@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>test</title>
-        <script type="text/javascript">
-            function toggle_check(){
-                var checkboxes = document.getElementsByName('id[]');
-                var button    = document.getElementById('toggle');
-                if (button.value == 'select') {
-                    for (var i in checkboxes) {
-                        checkboxes[i].checked = "FALSE";
-                    }
-                    button.value = 'deselect';
-                } else {
-                    for (var i in checkboxes) {
-                        checkboxes[i].checked = "";
-                    }
-                    button.value = 'select';
+<head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#select_all').on('click',function(){
+                if(this.checked){
+                    $('.checkbox').each(function(){
+                        this.checked = true;
+                    });
+                }else{
+                     $('.checkbox').each(function(){
+                        this.checked = false;
+                    });
                 }
-            }
-        </script>
-    </head>
-    <body>
-        <form class="" action="<?php echo base_url('TestController/test');?>" method="post">
-            <input type="button" id="toggle" value="select" onclick="toggle_check()">
-            <table>
-                <thead>
-                    <th>Check Box</th>
-                    <th>Student Name</th>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><input type="checkbox" name="id[]" value="1"></td>
-                        <td>Abu</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="id[]" value="2"></td>
-                        <td>Baker</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" name="id[]" value="3"></td>
-                        <td>Siddik</td>
-                    </tr>
+            });
 
-                </tbody>
-            </table>
-            <input type="submit" name="" value="Submit">
-        </form>
+            $('.checkbox').on('click',function(){
+                if($('.checkbox:checked').length == $('.checkbox').length){
+                    $('#select_all').prop('checked',true);
+                }else{
+                    $('#select_all').prop('checked',false);
+                }
+            });
+        });
+    </script>
+</head>
+<body>
 
-    </body>
+    <ul>
+        <li><input type="checkbox" class="checkbox" value="1"/>Item 1</li>
+        <li><input type="checkbox" class="checkbox" value="2"/>Item 2</li>
+        <li><input type="checkbox" class="checkbox" value="3"/>Item 3</li>
+        <li><input type="checkbox" class="checkbox" value="4"/>Item 4</li>
+        <li><input type="checkbox" class="checkbox" value="5"/>Item 5</li>
+    </ul>
+
+</body>
 </html>

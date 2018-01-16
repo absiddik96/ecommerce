@@ -28,7 +28,7 @@ class BuyerController extends Admin_Controller
         $this->data['deleteEwallet']    = "buyer/deleteEwallet";
 
         $this->data['personalIdentity'] = "buyer/personalIdentity";
-        $this->data['proofOfAddress'] = "buyer/proofOfAddress";
+        $this->data['proofOfAddress']   = "buyer/proofOfAddress";
 
 
 

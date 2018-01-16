@@ -20,6 +20,14 @@
     <link href="<?php echo base_url(); ?>toolkit/custom/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
     <!-- product -->
 
+    <!-- custom -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url('toolkit/noUiSlider/nouislider.min.css')?>"/>
+    <!-- custom -->
+
+    <!-- range slider -->
+    <link rel="stylesheet" href="<?= base_url(); ?>toolkit/rangerSlider/jquery-ui.css" />
+    <link rel="stylesheet" href="<?= base_url(); ?>toolkit/DataTables/datatables.min.css" />
+    <!-- range slider -->
 
 </head>
 <body>
@@ -97,6 +105,26 @@
                         <li><a href="<?php echo base_url("admin/size"); ?>"><span class="fa fa-calendar"></span> Size</a></li>
                         <li><a href="<?php echo base_url("admin/branch"); ?>"><span class="fa fa-edit"></span> Branch</a></li>
                         <li><a href="<?php echo base_url("admin/brand"); ?>"><span class="fa fa-columns"></span> Brand</a></li>
+                    </ul>
+                </li>
+                <li class="xn-openable">
+                    <a href="#"><span class="fa fa-files-o"></span> <span class="xn-text">Store Management</span></a>
+                    <ul>
+                        <li><a href="<?php echo base_url("admin/store"); ?>"><span class="fa fa-comments"></span> Store</a></li>
+                        <li class="xn-openable">
+                            <a href="#"><span class="fa fa-clock-o"></span> Product</a>
+                            <ul>
+                                <li><a href="<?php echo base_url("admin/store/addProduct"); ?>"><span class="fa fa-plus"></span>Add Product</a></li>
+                                <li><a href="<?php echo base_url("admin/store/productList"); ?>"><span class="fa fa-align-justify"></span> List of Product</a></li>
+                            </ul>
+                        </li>
+                        <li class="xn-openable">
+                            <a href="#"><span class="fa fa-clock-o"></span> Discount</a>
+                            <ul>
+                                <li><a href="<?php echo base_url("admin/addDiscount"); ?>"><span class="fa fa-plus"></span>Add Discount</a></li>
+                                <li><a href=""><span class="fa fa-align-justify"></span> List of Disconted Product</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li class="xn-openable">
@@ -229,6 +257,7 @@
 <!-- END PLUGINS -->
 
 <!-- START THIS PAGE PLUGINS-->
+<script type="text/javascript" src="<?php echo base_url('assets/backend/admin/js/plugins/smartwizard/jquery.smartWizard-2.0.min.js');?>"></script>
 <script type='text/javascript' src='<?php echo base_url('assets/backend/admin/js/plugins/icheck/icheck.min.js');?>'></script>
 <script type="text/javascript" src="<?php echo base_url('assets/backend/admin/js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/backend/admin/js/plugins/scrolltotop/scrolltopcontrol.js');?>"></script>
@@ -243,6 +272,12 @@
 
 <script type="text/javascript" src="<?php echo base_url('assets/backend/admin/js/plugins.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/backend/admin/js/actions.js');?>"></script>
+<script src="<?php echo base_url(); ?>toolkit/DataTables/datatables.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+</script>
 
 <!-- END TEMPLATE -->
 
@@ -479,6 +514,8 @@
     $('#category').dropdown();
     $('#company').dropdown();
     $('#color').dropdown();
+    $('#discount_type').dropdown();
+    $('#store').dropdown();
 </script>
 
 <script type="text/javascript">
@@ -506,6 +543,264 @@
         });
     });
 </script>
+
+<!-- checkbox all select  -->
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#select_all').on('click',function(){
+            if(this.checked){
+                $('.checkbox').each(function(){
+                    this.checked = true;
+                });
+            }else{
+                $('.checkbox').each(function(){
+                    this.checked = false;
+                });
+            }
+        });
+
+        $('.checkbox').on('click',function(){
+            if($('.checkbox:checked').length == $('.checkbox').length){
+                $('#select_all').prop('checked',true);
+            }else{
+                $('#select_all').prop('checked',false);
+            }
+        });
+    });
+</script>
+<!-- checkbox all select  -->
+
+<!-- range slider -->
+<script src="<?php echo base_url(); ?>toolkit/rangerSlider/jquery-ui.js"></script>
+<script type="text/javascript">
+    var minPrice = parseFloat(document.getElementById("minPrice").value);
+    var maxPrice = parseFloat(document.getElementById("maxPrice").value);
+
+    var category_id;
+    var sub_category_id;
+    var jsminPrice;
+    var jsmaxPrice;
+    var store_id;
+    var eMinPrice;
+    var eMaxPrice;
+
+// var jsminPrice = document.getElementById("jsminPrice");
+// var jsmaxPrice = document.getElementById("jsmaxPrice");
+
+var hide = document.getElementById("hide");
+
+$(document).ready(function() {
+    var outputSpan = $('#spanOutput');
+    var outputSpan2 = $('#spanOutput2');
+    var sliderDiv = $('#ab');
+
+    sliderDiv.slider({
+        range: true,
+        min: minPrice,
+        step: 0.01,
+        max: maxPrice,
+        values: [minPrice, maxPrice],
+        slide: function(event, ui) {
+            outputSpan.html(ui.values[0] + ' - ' + ui.values[1]);
+        },
+        stop: function(event, ui) {
+           $('#select_all').prop('checked',false);
+
+           $('#jsminPrice').val(ui.values[0]);
+           $("#jsmaxPrice").val(ui.values[1]);
+
+           $('#eMinPrice').val(ui.values[0]);
+           $("#eMaxPrice").val(ui.values[1]);
+
+           category_id = parseFloat($('#category').val());
+           sub_category_id = parseFloat($('#sub_category').val());
+           store_id = parseFloat($('#store_id').val());
+
+           $.ajax({
+            url: "<?php echo base_url() ?>admin/getProductByPriceRange",
+            type: "POST",
+            data: {'store_id': store_id, 'minPrice': ui.values[0], 'maxPrice': ui.values[1], 'category_id': category_id, 'sub_category_id': sub_category_id},
+            dataType: "json",
+            success: function (data) {
+                hide.style.display = "none";
+                $('#price_range_product').html(data);
+            },
+            error: function () {
+                alert("No product found");
+            }
+        });
+       }
+   });
+
+    outputSpan.html(sliderDiv.slider('values', 0) + ' - ' + sliderDiv.slider('values', 1));
+});
+
+$('#category').on('change', function () {
+
+     $('#select_all').prop('checked',false);
+
+    var category_id = $(this).val();
+    jsminPrice = parseFloat($('#jsminPrice').val());
+    jsmaxPrice = parseFloat($('#jsmaxPrice').val());
+    store_id = parseFloat($('#store_id').val());
+    sub_category_id = "";
+
+    if (category_id == '') {
+        $('#sub_category').prop('disabled', true);
+    } else {
+        $('#sub_category').prop('disabled', false);
+
+        $.ajax({
+            url: "<?php echo base_url() ?>admin/getSubCategoryByJS",
+            type: "POST",
+            data: {'category_id': category_id},
+            dataType: "json",
+            success: function (data) {
+                $('#sub_category').html(data);
+            },
+            error: function () {
+                $('#sub_category').html("data");
+            }
+        });
+
+        $.ajax({
+            url: "<?php echo base_url() ?>admin/getProductByPriceRange",
+            type: "POST",
+            data: {'store_id': store_id, 'minPrice': jsminPrice, 'maxPrice': jsmaxPrice, 'category_id': category_id, 'sub_category_id': sub_category_id},
+            dataType: "json",
+            success: function (data) {
+                hide.style.display = "none";
+                $('#price_range_product').html(data);
+            },
+            error: function () {
+                alert("No product found");
+            }
+        });
+    }
+});
+
+
+
+$('#sub_category').on('change', function () {
+
+     $('#select_all').prop('checked',false);
+
+    var sub_category_id = $(this).val();
+    jsminPrice = parseFloat($('#jsminPrice').val());
+    jsmaxPrice = parseFloat($('#jsmaxPrice').val());
+    category_id = parseFloat($('#category').val());
+    store_id = parseFloat($('#store_id').val());
+
+    $.ajax({
+        url: "<?php echo base_url() ?>admin/getProductByPriceRange",
+        type: "POST",
+        data: {'store_id': store_id, 'minPrice': jsminPrice, 'maxPrice': jsmaxPrice, 'category_id': category_id, 'sub_category_id': sub_category_id},
+        dataType: "json",
+        success: function (data) {
+            hide.style.display = "none";
+            $('#price_range_product').html(data);
+        },
+        error: function () {
+            alert("No product found");
+        }
+    });
+
+});
+
+$('#eMinPrice').on('change', function () {
+
+
+    $('#select_all').prop('checked',false);
+
+    eMinPrice = $(this).val();
+    eMaxPrice = parseFloat($('#eMaxPrice').val());
+
+    sub_category_id = parseFloat($('#sub_category').val());
+    category_id = parseFloat($('#category').val());
+    store_id = parseFloat($('#store_id').val());
+
+    $.ajax({
+        url: "<?php echo base_url() ?>admin/getProductByPriceRange",
+        type: "POST",
+        data: {'store_id': store_id, 'minPrice': eMinPrice, 'maxPrice': eMaxPrice, 'category_id': category_id, 'sub_category_id': sub_category_id},
+        dataType: "json",
+        success: function (data) {
+            hide.style.display = "none";
+            $('#price_range_product').html(data);
+        },
+        error: function () {
+            alert("No product found");
+        }
+    });
+
+});
+
+$('#eMaxPrice').on('change', function () {
+
+
+    $('#select_all').prop('checked',false);
+
+    
+    eMinPrice = parseFloat($('#eMinPrice').val());
+    eMaxPrice = $(this).val();
+
+    sub_category_id = parseFloat($('#sub_category').val());
+    category_id = parseFloat($('#category').val());
+    store_id = parseFloat($('#store_id').val());
+
+    $.ajax({
+        url: "<?php echo base_url() ?>admin/getProductByPriceRange",
+        type: "POST",
+        data: {'store_id': store_id, 'minPrice': eMinPrice, 'maxPrice': eMaxPrice, 'category_id': category_id, 'sub_category_id': sub_category_id},
+        dataType: "json",
+        success: function (data) {
+            hide.style.display = "none";
+            $('#price_range_product').html(data);
+        },
+        error: function () {
+            alert("No product found");
+        }
+    });
+
+});
+
+
+</script>
+
+<script>
+    function myFunction() {
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+        for (i = 0; i < tr.length; i++) {
+            td2 = tr[i].getElementsByTagName("td")[2];
+            td3 = tr[i].getElementsByTagName("td")[3];
+            td4 = tr[i].getElementsByTagName("td")[4];
+            td5 = tr[i].getElementsByTagName("td")[5];
+
+            if (td2 || td3 || td4 || td5) {
+                if (td2.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else if(td3.innerHTML.toUpperCase().indexOf(filter) > -1){
+                    tr[i].style.display = "";
+                }else if(td4.innerHTML.toUpperCase().indexOf(filter) > -1){
+                    tr[i].style.display = "";
+                }else if(td5.innerHTML.toUpperCase().indexOf(filter) > -1){
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+
+        }
+    }
+</script>
+
+
+<!-- range slider -->
 
 <!-- product -->
 

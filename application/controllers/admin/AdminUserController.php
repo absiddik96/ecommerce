@@ -27,6 +27,8 @@ class AdminUserController extends Admin_Controller
 
         if($this->form_validation->run()){
             $user_id = $this->admin_user_m->create_admin_user();
+            $this->user_working_zone_m->add_working_zone($user_id);
+
             if($user_id){
                 if($this->admin_user_location_m->create_admin_user_location($user_id)){
                     $this->session->set_flashdata('message','Admin / Staff create successfull.');
@@ -40,6 +42,7 @@ class AdminUserController extends Admin_Controller
         }
         $this->data['countries'] = $this->country_m->get();
         $this->data['roles']     = $this->role_m->role_for_admin_staff();
+        $this->data['stores']     = $this->store_m->get();
         $this->data['content']   = 'admin/user/admin/create';
         $this->load->view('admin/layouts/_layouts_main',$this->data);
 

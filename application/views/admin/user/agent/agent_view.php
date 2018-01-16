@@ -1,7 +1,7 @@
 <!-- START DEFAULT DATATABLE -->
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Super Agent List</h3>
+        <h3 class="panel-title">Agent List</h3>
         <ul class="panel-controls">
             <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
             <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
@@ -26,7 +26,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php if(!empty($agents) && count($agents)): ?>
+                <?php if(!empty($agents)): ?>
 
                     <?php foreach ($agents as $agent): ?>
                         <tr>

@@ -44,8 +44,8 @@ $route['admin/editProductCategory/(:num)']        = 'admin/product/AdminProductC
 $route['admin/editProductColor/(:num)']           = 'admin/product/AdminProductController/edit_product_color/$1';
 $route['admin/deleteProductColor/(:num)/(:num)']  = 'admin/product/AdminProductController/delete_product_color/$1/$2';
 
-$route['admin/editProductSize/(:num)']           = 'admin/product/AdminProductController/edit_product_size/$1';
-$route['admin/deleteProductSize/(:num)/(:num)']  = 'admin/product/AdminProductController/delete_product_size/$1/$2';
+$route['admin/editProductSize/(:num)']            = 'admin/product/AdminProductController/edit_product_size/$1';
+$route['admin/deleteProductSize/(:num)/(:num)']   = 'admin/product/AdminProductController/delete_product_size/$1/$2';
 
 $route['admin/editProductDetails/(:num)']         = 'admin/product/AdminProductController/edit_product_details/$1';
 $route['admin/editProductDetails/(:num)/(:num)']  = 'admin/product/AdminProductController/edit_product_details/$1/$2';
@@ -53,6 +53,22 @@ $route['admin/editProductDetails/(:num)/(:num)']  = 'admin/product/AdminProductC
 $route['admin/deleteProduct/(:num)']              = 'admin/product/AdminProductController/product_delete/$1';
 $route['admin/viewProduct/(:num)']                = 'admin/product/AdminProductController/product_view/$1';
 $route['admin/productList']                       = 'admin/product/AdminProductController/product_list';
+
+//..................product discount
+$route['admin/addDiscount']            = 'admin/product/AdminProductDiscountController/add_discount';
+$route['admin/addDiscount/product']    = 'admin/product/AdminProductDiscountController/add_discount_prodcut';
+$route['admin/getProductByPriceRange'] = 'admin/product/AdminProductDiscountController/get_product_by_price_range';
+
+//............ Store
+$route['admin/store']              = 'admin/store_management/AdminStoreController/create';
+$route['admin/updateStore/(:num)'] = 'admin/store_management/AdminStoreController/update/$1';
+$route['admin/deleteStore/(:num)'] = 'admin/store_management/AdminStoreController/delete/$1';
+
+$route['admin/store/addProduct']      = 'admin/store_management/AdminStoreProductController/add_store_product';
+$route['admin/store/productList']     = 'admin/store_management/AdminStoreProductController/get_store_product';
+$route['admin/store/removeProduct/(   :num)']   = 'admin/store_management/AdminStoreProductController/remove_product/$1';
+$route['admin/store/showStoreProduct/(:num)']   = 'admin/store_management/AdminStoreProductController/show_store_product/$1';
+
 
 
 //........Supplier Buyer management by admin

@@ -13,7 +13,7 @@
         try {
             $this->load->view('errors/custom_error');
         } catch (Exception $e) {
-            
+
         }
         ?>
         <table class="table datatable">

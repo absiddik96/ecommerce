@@ -14,4 +14,6 @@ class HomeController extends Frontend_Controller {
 		$this->load->view('login/login',$this->data);
 	}
 
+	
+
 }

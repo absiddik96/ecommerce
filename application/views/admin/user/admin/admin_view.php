@@ -13,7 +13,7 @@
         try {
             $this->load->view('errors/custom_error');
         } catch (Exception $e) {
-            
+
         }
         ?>
         <table class="table datatable">
@@ -35,9 +35,9 @@
                             <td><?php echo htmlentities($admin->status == 1? 'Active':'Deactived');?></td>
                             <td>
                                 <?php if($admin->status == 1): ?>
-                                    <a href="<?php echo site_url('admin/userAdminDeactive/').urlencode($admin->user_id).'adminList';?>" class="btn btn-sm btn-warning">Deactive</a>
+                                    <a href="<?php echo site_url('admin/userAdminDeactive/').urlencode($admin->user_id).'/adminList';?>" class="btn btn-sm btn-warning">Deactive</a>
                                 <?php else: ?>
-                                    <a href="<?php echo site_url('admin/userAdminActive/').urlencode($admin->user_id).'adminList';?>" class="btn btn-sm btn-success">Active</a>
+                                    <a href="<?php echo site_url('admin/userAdminActive/').urlencode($admin->user_id).'/adminList';?>" class="btn btn-sm btn-success">Active</a>
                                 <?php endif; ?>
                                 <a href="<?php echo site_url('admin/userAdminDelete/').urlencode($admin->user_id).'adminList';?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this admin?');">Delete</a>
                             </td>

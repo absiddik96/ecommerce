@@ -38,8 +38,85 @@ class Product_details_m extends MY_Model
     public function get_details()
     {
         $this->db->select('product_details.product_code,product_details.product_title,product_details.price,categorys.category_title,sub_categorys.sub_category_title');
-        $this->db->join('categorys', 'categorys.id = product_details.category_id');
-        $this->db->join('sub_categorys', 'sub_categorys.id=product_details.sub_category_id');
+        $this->db->join('categorys', 'categorys.id = product_details.category_id','left');
+        $this->db->join('sub_categorys', 'sub_categorys.id=product_details.sub_category_id','left');
+        $this->db->order_by("product_details.product_title", "asc");
+        $product_details = $this->get();
+        if(count($product_details)){
+            return $product_details;
+        }else {
+            return FALSE;
+        }
+	}
+
+    public function get_products_by_price_range($store_id = '',$minPrice = '', $maxPrice = '', $category_id = '', $sub_category_id = '')
+    {
+        $this->db->select('stores.store_name,store_products.id,product_details.product_code,product_details.product_title,product_details.price,categorys.category_title,sub_categorys.sub_category_title');
+        $this->db->join('categorys', 'categorys.id = product_details.category_id','left');
+        $this->db->join('sub_categorys', 'sub_categorys.id=product_details.sub_category_id','left');
+        $this->db->join('store_products', 'store_products.product_code = product_details.product_code');
+        $this->db->join('stores', 'store_products.store_id = stores.id');
+        if ($store_id !== '') {
+            $this->db->where('stores.id',$store_id);
+        }
+
+        if ($minPrice!="NaN" && $maxPrice!="NaN" && $minPrice!="" && $maxPrice!="") {
+            $this->db->where('product_details.price >=', $minPrice);
+            $this->db->where('product_details.price <=', $maxPrice);
+        }
+
+        if ($category_id!="NaN" && $category_id!="") {
+            $this->db->where('product_details.category_id =', $category_id);
+        }
+
+        if ($sub_category_id!="NaN" && $sub_category_id!="") {
+            $this->db->where('product_details.sub_category_id =', $sub_category_id);
+        }
+
+
+        $this->db->order_by("product_details.price", "asc");
+        $product_details = $this->get();
+        if(count($product_details)){
+            return $product_details;
+        }else {
+            return FALSE;
+        }
+	}
+
+    public function get_min_price()
+    {
+        $this->db->select_min('price','minPrice');
+        $min_price = $this->get(NULL,TRUE);
+        if(count($min_price)){
+            return $min_price;
+        }else {
+            return FALSE;
+        }
+    }
+
+    public function get_max_price()
+    {
+        $this->db->select_max('price','maxPrice');
+        $max_price = $this->get(NULL,TRUE);
+        if(count($max_price)){
+            return $max_price;
+        }else {
+            return FALSE;
+        }
+    }
+
+	public function get_store_product($store_id = '')
+    {
+        $this->db->select('stores.store_name,store_products.id,product_details.product_code,product_details.product_title,product_details.price,categorys.category_title,sub_categorys.sub_category_title');
+        $this->db->join('categorys', 'categorys.id = product_details.category_id','left');
+        $this->db->join('sub_categorys', 'sub_categorys.id=product_details.sub_category_id','left');
+        $this->db->join('store_products', 'store_products.product_code = product_details.product_code');
+        $this->db->join('stores', 'store_products.store_id = stores.id');
+
+        if ($store_id !== '') {
+            $this->db->where('stores.id',$store_id);
+        }
+
         $this->db->order_by("product_details.product_title", "asc");
         $product_details = $this->get();
         if(count($product_details)){

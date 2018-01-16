@@ -11,8 +11,10 @@ class TestController extends Admin_Controller
 
     public function index()
     {
-        $this->load->view('test/test_view');
+        echo $this->session->userdata('user_id');
+        // echo $this->admin_user_m->is_super_admin();
     }
+
     public function test()
     {
         $checkboxes = $this->input->post('id[]');

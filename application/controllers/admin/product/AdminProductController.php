@@ -3,6 +3,8 @@
 class AdminProductController extends Admin_Controller
 {
 
+    
+
     public function __construct()
     {
         parent::__construct();
@@ -10,7 +12,7 @@ class AdminProductController extends Admin_Controller
 
     public function add_product()
     {
-        $this->form_validation->set_rules('product_title','Title','trim|required|min_length[3]');
+    	$this->form_validation->set_rules('product_title','Title','trim|required|min_length[3]');
         $this->form_validation->set_rules('category','Category','trim|required');
         $this->form_validation->set_rules('price','Price','trim|required');
         if ($this->form_validation->run()) {
@@ -220,9 +222,9 @@ class AdminProductController extends Admin_Controller
 
         if($file){
             $this->product_details_m->delete($product_code);
-            $this->session->set_flashdata('success','Delete Brand Successfully.');
+            $this->session->set_flashdata('success','Delete Product Successfully.');
         }else {
-            $this->session->set_flashdata('fail','Delete Brand Failed.');
+            $this->session->set_flashdata('fail','Delete Product Failed.');
         }
         redirect(base_url('admin/productList'));
     }

@@ -9,7 +9,7 @@
         try {
             $this->load->view('errors/custom_error');
         } catch (Exception $e) {
-            
+
         }
         ?>
         <form class="form-horizontal" action="<?php echo site_url('admin/createAdmin');?>" method="post">
@@ -117,6 +117,18 @@
                             <option value="">Select Role</option>
                             <?php foreach ($roles as $role): ?>
                             <option value="<?php echo $role->id; ?>"><?php echo str_replace("_"," ",$role->name); ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">Working Zone</label>
+                    <div class="col-md-8">
+                        <select class="form-control" name="working_zone">
+                            <option value="">Select Working Zone</option>
+                            <?php foreach ($stores as $store): ?>
+                            <option value="<?php echo $store->id; ?>"><?php echo str_replace("_"," ",$store->store_name); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
